@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>vue-demo3</title>
+    <meta charset="UTF-8">
+    <title>vue-demo3</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
+
 <body>
+	<div id="app1"></div>
 
 
-
-
-	<script type="text/javascript">
-	/**
-	 * 每个vue应用都是通过构造函数Vue创建一个Vue的根实例启动
-	 * var veu = new Vue({ // 内容 })
-	 */
-	</script>
+    <script type="text/javascript">
+    /**
+     * 每个vue应用都是通过构造函数Vue创建一个Vue的根实例启动
+     * var veu = new Vue({ // 选项 })
+     * 实例化vue时需要传入一个选项对象，它可以包含数据、模板、挂载元素、方法、声明周期钩子等选项
+     */
+    /**
+     * 属性和方法
+     */
+    var data = {
+        a: 1
+    };
+    var vm = new Vue({
+        data: data
+    });
+    /**
+     * 每个vue实例都会代理其data对象里所有的属性
+     * @type {[type]}
+     */
+    console.log(vm.a === data.a); // true
+    console.info('代理vm',vm.data); // undefined
+    // 因为数据时响应式的，改变其data或者属性的值都会相互影响
+    vm.a = 11;
+    console.log(data.a); //11
+    data.a = 111;
+    console.log(vm.a); //111
+    /**
+     * vue实例还会暴漏一些有用的实例属性和方法，其都有前缀$
+     * 方便与代理的data属性区分
+     */
+    var data2 = {b:1};
+    var app1 = new Vue({
+    	el:'#app1',
+    	data:data2
+    });
+    console.log(app1.$data === data2); //true
+    console.log(app1.b); // 1
+    console.log(app1.$el === document.getElementById('app1')); //true
+    </script>
 </body>
+
 </html>
