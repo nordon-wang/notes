@@ -28,7 +28,11 @@
         <a v-bind:href="url">href</a>
         <a href="#" v-on:click='clickEvent'>clickEvent</a>
         <a v-bind:href="url" v-on:click='clickPrevent'>clickPrevent</a>
-        <a v-bind:href="url" v-on:click.prevent='clickPrevent'>clickPrevent</a>
+        <a v-bind:href="url" v-on:click.prevent='clickPrevent'>clickPrevent</a><br>
+        <!-- 过滤器 -->
+        <!-- <input type="text" v-bind:value='number | capitalize' name=""> -->
+        <p>{{ number | capitalize}}</p>
+        <p>{{ str | capitalize}}</p>
     </div>
     <script type="text/javascript">
     /**
@@ -73,6 +77,8 @@
         data: {
         	see:true,
         	url:'http://www.baidu.com',
+        	number:1223,
+        	str:'abcdefg'
         },
         methods:{
         	clickEvent (){
@@ -81,7 +87,17 @@
         	clickPrevent (){
         		console.log('clickPrevent');
         	}
-        }
+        },
+        filters:{
+    		capitalize : function(value){
+    			if (!value) {
+    				return '';
+    			}
+    			value = value.toString();
+    			return value.split('').reverse().join('');
+    			// return value.charAt(0).toUpperCase() + value.slice(1);
+    		}
+    	}
     });
     /**
      * 指令 带有 v- 前缀的特殊属性
@@ -103,6 +119,29 @@
     /**
      * filters 过滤器
      * vue允许自定义过滤器，用于文本格式化等。由 'pipe'管道符 指示
+     */
+    // 1.过滤器总接受表达式的值作为第一个参数
+    // 2. 过滤器可以串联 {{ msg | filters1 | filters2}}
+    // 3.过滤器是javascript函数，因此可以接受参数
+    // 		-- {{msg | filters(arg1,arg2)}}
+   /* new Vue({
+    	filters:{
+    		capitalize : function(value){
+    			if (!value) {
+    				return '';
+    			}
+    			value = value.toString();
+    			return value.charAt(0).toUpperCase() + value.slice(1);
+    		}
+    	}
+    });*/
+    /**
+     * 缩写
+     * vue提供了两个缩写
+     * v-bind:  >> :
+     * <a  v-bind:title='title'></a>  -->> <a :title='title'></a>
+     * v-on: >> @
+     * <a v-on:click='click'></a> -->> <a @click='click'></a>
      */
     </script>
 </body>
