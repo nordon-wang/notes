@@ -13,7 +13,7 @@
         <p>message: {{msg}}</p>
         <p v-once>v-once指令，实现一次性插值{{onceMsg}}</p>
         <div v-html="pureHtml"></div>
-        <!-- <div>{{{pureHtml}}}</div> -->
+        <!-- <div>{{{pureHtml.html}}}</div> -->
         <div v-bind:title='bindProps'></div>
         <input type="text" v-bind:value="bindProps" name="">
         <p>{{ number + 22}}</p>
