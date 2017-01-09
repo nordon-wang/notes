@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{message}}</div>
+    <div id="app2">
+        <span v-bind:title='message'>
+			Hover your mouse over me for a few seconds to see my dynamically bound title!
+		</span>
+    </div>
+    <div id="app3">
+        <p v-if='see'>now you can sees</p>
+    </div>
+    <div id="app4">
+		<ol>
+			<li v-for='td in todos'>
+			{{td.text}}
+			</li>
+		</ol>
+    </div>
+
+	<div id="app5">
+		<p>{{message}}</p>
+        <button v-on:click='reverseMage'>reverse</button>
+	</div>
+
+    <div id="app6">
+        <input type="text" v-on:change='changeInput' name="" class="input1" v-bind:value="message">
+        <p>{{modelDemo}}</p>
+        <input type="text" v-model='modelDemo' name="">
+    </div>
+
+    <!-- script -->
+    <script type="text/javascript">
+    var app6 = new Vue({
+        el:"#app6",
+        data:{
+            message:'input text',
+            modelDemo:'hello nordon'
+        },
+        methods:{
+            changeInput (){
+                console.log('test');
+            }
+        }
+    });
+
+    var app5 = new Vue({
+        el:'#app5',
+        data:{
+            message:'abcd'
+        },
+        methods:{
+            reverseMage (){
+                this.message = this.message.split('').reverse().join('');
+                console.log('test');
+            }
+        }
+    });
+
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            todos: [{
+                text: 'Learn JavaScript'
+            }, {
+                text: 'Learn Vue'
+            }, {
+                text: 'Build something awesome'
+            }]
+        }
+    });
+
+
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            see: true
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello vue'
+        }
+    });
+    app.message = 'noredon';
+
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'you loaded this page on' + new Date()
+        }
+    });
+    </script>
+</body>
+
+</html>
