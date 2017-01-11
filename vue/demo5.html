@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>计算属性</title>
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-</head>
-<body>
-	<div id="app1">
-		<p>{{ msg.split('').reverse().join('')}}</p>
-		<p>{{msg}}</p>
-		<p>{{reverseMsg}}</p>
-		<p>{{ dateNow}}</p>
-		<p>{{ reverseFun()}}</p>
-		<p>{{ dateNowFun()}}</p>
-	</div>
-</body>
 
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <style type="text/css">
+    #app1 {}
+    
+    .border-1px {
+        position: relative;
+    }
+    
+    .border-1px:after {
+        position: absolute;
+        content: '';
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        border-top: 1px solid #666;
+        border-bottom: 1px solid #666;
+    }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <p>{{ msg.split('').reverse().join('')}}</p>
+        <p>{{msg}}</p>
+        <p>{{reverseMsg}}</p>
+        <p>{{ dateNow}}</p>
+        <p>{{ reverseFun()}}</p>
+        <p>{{ dateNowFun()}}</p>
+    </div>
+    <div class="border-1px">dsdasdas</div>
+</body>
 <script type="text/javascript">
 var app1 = new Vue({
-	el:'#app1',
-	data:{
-		msg:'hello'
-	},
-	computed:{
-		reverseMsg (){
-			return this.msg.split('').reverse().join('');
-		},
-		dateNow (){
-			return  Date.now();
-		}
-	},
-	methods:{
-		reverseFun (){
-			return this.msg.split('').reverse().join('');
-		},
-		dateNowFun(){
-			return Date.now();
-		}
-	}
+    el: '#app1',
+    data: {
+        msg: 'hello'
+    },
+    computed: {
+        reverseMsg() {
+            return this.msg.split('').reverse().join('');
+        },
+        dateNow() {
+            return Date.now();
+        }
+    },
+    methods: {
+        reverseFun() {
+            return this.msg.split('').reverse().join('');
+        },
+        dateNowFun() {
+            return Date.now();
+        }
+    }
 });
 /**
  * 计算属性，
  * computed 和 methods 的属性名不可相同， 会导致重写
  * 不经过计算属性，我们可以在 method 中定义一个相同的函数来替代它。
  * 对于最终的结果，两种方式确实是相同的。
- * 然而，不同的是计算属性*是基于它的依赖缓存。计算属性只有在它的相关依赖发生改变时才会重新取值。
+ * 然而，不同的是计算属性是基于它的依赖缓存。计算属性只有在它的相关依赖发生改变时才会重新取值。
  * 这就意味着只要 message 没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。
  */
-
 </script>
+
 </html>

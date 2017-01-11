@@ -1,20 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>class-style</title>
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <title>class-style</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
+
 <body>
-	<div id="app1">
+    <div id="app1">
+        <div v-bind:title='message'></div>
+        <div>{{message}}</div>
+        <!-- text-danger 使用双引号包裹 -->
+        <div class="static" v-bind:class='{active : isActive, "text-danger":hasError}'></div>
+    </div>
+    <div id="app2">
+        <div class="static2" v-bind:class="classObj"></div>
+    </div>
+    <div id="app3">
+        <div class="static3" v-bind:class="classObj"></div>
+    </div>
+    <div id="app4">
+        <div class="static3" v-bind:class="[activeClass, errorClass]"></div>
+    </div>
+    <div id="app5">
+        <div class="static3" v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+    </div>
+    <div id="app6">
+        <div class="static3" v-bind:class="[{active:isActive}, errorClass]"></div>
+    </div>
+    <my-component class="baz boo"></my-component>
+    <!--  -->
+    <div id="style1">
+        <div v-bind:style='{color:color, "font-size":fs + "px"}'>普通模式</div>
+        <div v-bind:style='{color:color, fontSize:fs + "px"}'>普通模式</div>
+    </div>
+    <div id="style2">
+        <div v-bind:style="styleObj">样式对象--style2</div>
+        <div v-bind:style="styleObj2">样式对象--style2</div>
+    </div>
+    <div id="style3">
+        <div v-bind:style="styObj">计算属性增加style</div>
+    </div>
+    <div id="style4">
+        <div :style='[baseSty,heightSty]'>数组语法添加</div>
+    </div>
+    <script type="text/javascript">
+    /**
+     * 单个绑定 v-bind 可以根据条件切换列表中的class
+     * @type {Vue}
+     */
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            message: 'vue',
+            isActive: true,
+            hasError: false
+        }
+    });
 
-	</div>
-	<script type="text/javascript">
+    /**
+     *也可以直接绑定一个对象
+     */
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            classObj: {
+                isActive: true,
+                hasError: false
+            }
+        }
+    });
+    /**
+     * 可以绑定返回对象的计算属性
+     */
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classObj() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    });
+    /**
+     * 数组语法
+     * --可以把数组传给v-bind:class，以应用一个class列表
+     */
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    });
+    /**
+     * 数组语法--根据条件切换class
+     *   缺点--此方法会一直加载 text-danger
+     */
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            isActive: true,
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    });
+    /**
+     * 在数组语法中使用对象语法
+     * 可以解决多个条件class
+     */
+    var app6 = new Vue({
+        el: '#app6',
+        data: {
+            isActive: true,
+            errorClass: 'text-danger'
+        }
+    });
 
+    /**
+     * 用在组件上
+     */
+    Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    });
 
-	/**
-	 * 
-	 */
-	</script>
+    /**
+     * 绑定内联样式
+     */
+    /**
+     * 1.对象语法
+     * 	v-bind:style=""--按照css的语法写，可以使用驼峰命名也可以使用短横分隔命名
+     */
+    var style1 = new Vue({
+        el: '#style1',
+        data: {
+            color: 'red',
+            fs: '30'
+        }
+    });
+    /**
+     * 2.直接返回一个对象
+     * 对象的键值就是css的属性名，值就是属性值
+     */
+    var style2 = new Vue({
+        el: '#style2',
+        data: {
+            styleObj: {
+                color: 'green',
+                fontSize: '30px'
+            },
+            styleObj2: {
+                color: 'blue',
+                'font-size': '30px'
+            }
+        }
+    });
+    /**
+     * 3.计算属性增加style
+     */
+    var style3 = new Vue({
+        el: '#style3',
+        data: {
+            color: 'green',
+            fontSize: '30px'
+        },
+        computed: {
+            styObj() {
+                return {
+                    color: 'red',
+                    fontSize: '30px'
+                }
+            }
+        }
+    });
+    /**
+     * 4.数组语法
+     */
+    var style4 = new Vue({
+        el: "#style4",
+        data: {
+            baseSty: {
+                color: 'green'
+            },
+            heightSty:{
+                fontSize: '30px'
+            }
+        }
+    });
+    /**
+     * 自动添加前缀
+     * --当使用css3需要兼容的属性时候，vue会自动添加前缀
+     */
+    </script>
 </body>
+
 </html>
