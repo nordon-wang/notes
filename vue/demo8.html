@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- app1 -->
+    <div id="app1">
+        <ul>
+            <li v-for='i in item'>
+                {{i}}
+            </li>
+        </ul>
+        <ol>
+			<li v-for=" i in items">
+				{{i.msg}}
+			</li>
+        </ol>
+    </div>
+    <!-- app2 -->
+    <div id="app2">
+		<ul>
+			<li v-for='{item,index} in items'>
+				{{msg}}  {{index}} {{item.msg}}
+			</li>
+		</ul>
+
+    </div>
+    <!-- app3 -->
+    <div id="app3"></div>
+    <script type="text/javascript">
+    /**
+     * v-for指令根据一组数组的选项列表进行渲染
+     * 指定的特殊语法 item in items
+     * @type {Vue}
+     */
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            item: ['wy', 'nor', 'sb'],
+            items :[{
+            	msg:'hehe'
+            },{
+            	msg:'lele'
+            }]
+        }
+    });
+
+    /**
+     * v-for块中，拥有对父作用域的完全访问权限
+     */
+
+    var app2 = new Vue({
+        el: '#app2',
+        data:{
+        	msg:'parent',
+        	items:[{
+        		msg:'sdsd'
+        	},{
+        		msg:'sdsdsad'
+        	}]
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#app3'
+    });
+    </script>
+</body>
+
+</html>
