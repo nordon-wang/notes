@@ -58,9 +58,19 @@
     </div>
     <!-- APP6 -->
     <div id="app6">
+        <span v-for='i in 10'>{{i}}</span>
+    </div>
+    <!-- app7 -->
+    <div id="app7">
         <ul>
-            <li v-for='i in 10'>{{i}}</li>
+            <li v-for='item in items'>
+                {{item.message}}
+            </li>
         </ul>
+    </div>
+    <!-- app8 -->
+    <div id="app8">
+<ul><li v-for=" i in evenNum">{{i}}</li></ul>
     </div>
     <script type="text/javascript">
     /**
@@ -108,6 +118,7 @@
         }
     });
 
+
     var app4 = new Vue({
         el: '#app4',
         data: {
@@ -134,9 +145,47 @@
         }
     });
     var app6 = new Vue({
-        el:'#app6',
+        el: '#app6',
+        data: {
+
+        }
+    });
+    /**
+     * 变异数组
+     */
+    var app7 = new Vue({
+        el: '#app7',
+        data: {
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }]
+        }
+    });
+    app7.items = app7.items.filter(function(item) {
+        return item.message.match(/Foo/);
+    });
+
+    app7.items.push({
+        message: 'wwwwwwwwwwwwww'
+    });
+    /**
+     * 过滤、排序结果
+     */
+    var app8 = new Vue({
+        el:'#app8',
         data:{
-            
+            num: [ 1, 2, 3, 4, 5 ]
+        },
+        computed:{
+            evenNum:function(){
+                return this.num.filter(function(num){
+                    // return num % 2 === 0;
+                    // return true
+                    return num % 2 === 0 ? num : false;
+                })
+            }
         }
     });
     </script>

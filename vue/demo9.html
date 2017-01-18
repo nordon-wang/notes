@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件监听</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- app1 -->
+    <div id="app1">
+        <button v-on:click='count += 1'>add 1</button>
+        <p>{{count}}</p>
+    </div>
+    <!-- app2 -->
+    <div id="app2">
+        <button v-on:click="cl">fun</button>
+    </div>
+    <!-- app3 -->
+    <div id="app3">
+        <button v-on:click='cl("nordon")'> 内置处理器</button>
+    </div>
+    <!-- app4 -->
+    <div id="app4">
+        <input type="text" name="" v-model="msg">
+        <p>{{msg}}</p>
+    </div>
+    <!-- app5 -->
+    <div id="app5">
+        <div style="white-space: pre">{{msg}}</div>
+        <textarea v-model='msg'></textarea>
+        <br>
+        <input type="checkbox" id="checkbox" v-model='ck' name="">
+        <label for="checkbox">{{ck}}</label>
+        <br>
+        <input type="checkbox" id="jack" value="Jackss" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="Johnss" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mikess" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+        <br>
+        <input type="checkbox" id="checkbox" value="sss" v-model='cks' name="">
+        <label for="checkbox">{{cks}}</label>
+        <br>
+    </div>
+    <!-- app6 -->
+    <div id="app6">
+        <input type="radio" value="one" v-model='picked'> one
+        <input type="radio" value="two" v-model='picked'> two
+        <p>{{picked}}</p>
+        <select v-model='selected'>
+            <option>aa</option>
+            <option>bb</option>
+            <option>cc</option>
+        </select>
+        <p>{{selected}}</p>
+        <select v-model='selecteds' multiple="">
+            <option>aa</option>
+            <option>bb</option>
+            <option>cc</option>
+        </select>
+        <p>{{selecteds}}</p>
+    </div>
+    <!-- app7 -->
+    <div id="app7">
+        <select v-model='selected'>
+            <option v-for='option in options' v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <p>{{selected}}</p>
+        <div>{{msg}}</div>
+        <div v-html='msg'></div>
+    </div>
+    <!-- app8 -->
+    <div id="app8">
+		<input type="checkbox" v-model='ck' v-bind:true-value="a" v-bind:false-value="b">
+		<p>{{ck}}</p>
+		<input type="radio" v-model='rck' v-bind:value='c' name="ddd">
+		<input type="radio" v-model='rck' v-bind:value='d' name="ddd">
+		<p>{{rck}}</p>
+		<input type="text" v-model.lazy='lazys' name="">
+		<p>{{lazys}}</p>
+		<input type="number" v-model.number='num' name="">
+		<p>{{num}}</p>
+    </div>
+    <script type="text/javascript">
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            count: 0
+        }
+    });
+    /**
+     * 方法事件处理器
+     */
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            count: 0,
+            name: 'nordon'
+        },
+        methods: {
+            cl(event) {
+                console.log(`hi ${this.name} `);
+                console.log(`${event.target.tagName}`);
+            },
+            self() {
+                console.log(`自己执行`);
+            }
+        }
+    });
+    app2.self();
+    /**
+     * 内联处理器方法
+     * 	使用内联javascript语句
+     */
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+
+        },
+        methods: {
+            cl(msg) {
+                console.log(`say ${msg}`);
+            }
+        }
+    });
+    /**
+     * 表单控件绑定
+     * 	v-model并不关心表单控件初始化所生成的值
+     * 	因为其会选择vue实例数据来作为具体的值
+     */
+    var app4 = new Vue({
+        el: "#app4",
+        data: {
+            msg: ''
+        }
+    });
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            msg: '',
+            ck: false,
+            checkedNames: [],
+            cks: []
+        }
+    });
+
+    var app6 = new Vue({
+        el: '#app6',
+        data: {
+            picked: '',
+            selected: '',
+            selecteds: []
+        }
+    });
+
+    var app7 = new Vue({
+        el: '#app7',
+        data: {
+        	selected:'A',
+            options: [{
+                text: 'One',
+                value: 'A'
+            }, {
+                text: 'Two',
+                value: 'B'
+            }, {
+                text: 'Three',
+                value: 'C'
+            }],
+            msg:'<h1>h1h1h</h1>'
+        }
+    });
+
+    var app8 = new Vue({
+    	el:'#app8',
+    	data:{
+    		ck:'',
+    		a:122,
+    		b:111,
+    		rck:'',
+    		c:333,
+    		d:444,
+    		lazys:'',
+    		num:''
+    	}
+    });
+    </script>
+</body>
+
+</html>

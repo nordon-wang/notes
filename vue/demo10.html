@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app1">
+	<my-component></my-component>
+    </div>
+    <!-- app -->
+    <div id="app2"></div>
+    <!-- app -->
+    <div id="app3"></div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5"></div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+    <script type="text/javascript">
+    /**
+     * 全局组件--Vue.component
+     * 		必须在初始化根实例之前注册组件
+     * @type {String}
+     */
+    Vue.component('my-component',{
+    	template:'<div>a component</div>'
+    })
+    var app1 = new Vue({
+    	el:'#app1'
+    });
+    </script>
+</body>
+
+</html>
