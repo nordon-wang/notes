@@ -16,22 +16,52 @@
             </li>
         </ul>
         <ol>
-			<li v-for=" i in items">
-				{{i.msg}}
-			</li>
+            <li v-for=" i in items">
+                {{i.msg}}
+            </li>
         </ol>
     </div>
     <!-- app2 -->
     <div id="app2">
-		<ul>
-			<li v-for='{item,index} in items'>
-				{{msg}}  {{index}} {{item.msg}}
-			</li>
-		</ul>
-
+        <ul>
+            <li v-for="(item, index) in items">
+                {{parentMessage}} - {{ index }} - {{ item.message }}
+            </li>
+        </ul>
     </div>
     <!-- app3 -->
-    <div id="app3"></div>
+    <div id="app3">
+        <ol>
+            <li v-for="item of items">{{item.message}}</li>
+        </ol>
+    </div>
+    <!-- app4 -->
+    <div id="app4">
+        <ul>
+            <template v-for="item in items">
+                <li>{{item.message}}</li>
+                <li class="parentMessage"></li>
+            </template>
+        </ul>
+    </div>
+    <!-- app5 -->
+    <div id="app5">
+        <ul>
+            <li v-for="i in obj">{{i}}</li>
+        </ul>
+        <ol>
+            <li v-for="(v,i) in obj">{{v}}--{{i}}</li>
+        </ol>
+        <ul>
+            <li v-for='(v,i,s) in obj'>{{s}}--{{v}}--{{i}}</li>
+        </ul>
+    </div>
+    <!-- APP6 -->
+    <div id="app6">
+        <ul>
+            <li v-for='i in 10'>{{i}}</li>
+        </ul>
+    </div>
     <script type="text/javascript">
     /**
      * v-for指令根据一组数组的选项列表进行渲染
@@ -42,10 +72,10 @@
         el: '#app1',
         data: {
             item: ['wy', 'nor', 'sb'],
-            items :[{
-            	msg:'hehe'
-            },{
-            	msg:'lele'
+            items: [{
+                msg: 'hehe'
+            }, {
+                msg: 'lele'
             }]
         }
     });
@@ -56,18 +86,58 @@
 
     var app2 = new Vue({
         el: '#app2',
-        data:{
-        	msg:'parent',
-        	items:[{
-        		msg:'sdsd'
-        	},{
-        		msg:'sdsdsad'
-        	}]
+        data: {
+            parentMessage: 'Parent',
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }]
         }
     });
 
     var app3 = new Vue({
-        el: '#app3'
+        el: '#app3',
+        data: {
+            parentMessage: 'Parent',
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }]
+        }
+    });
+
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            parentMessage: true,
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }]
+        }
+    });
+    /**
+     * 对象迭代
+     */
+
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            obj: {
+                FirstName: 'John',
+                LastName: 'Doe',
+                Age: 30
+            }
+        }
+    });
+    var app6 = new Vue({
+        el:'#app6',
+        data:{
+            
+        }
     });
     </script>
 </body>

@@ -1,10 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>条件渲染</title>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
+
 <body>
-	
+    <div id="app1">
+        <template v-if='ok'>
+            <h1>v-if</h1>
+            <p>demo</p>
+        </template>
+        <template v-else>
+            <h1> v-else</h1>
+        </template>
+    </div>
+    <!-- v-else 元素必须紧跟在 v-if 元素或者 v-else-if的后面——否则它不能被识别。 -->
+    <div id="app2">
+        <template v-if='num >= 0.7'>
+            <h1>num >= 0.7</h1>
+        </template>
+        <template v-else-if=' num >0.4'>
+            <h1>num >= 0.4 </h1>
+        </template>
+        <template v-else>
+            <h1>num < 0.4</h1>
+        </template>
+    </div>
+    <!--app3  -->
+    <div id="app3">
+        <template v-if="loginType === 'username'">
+            <label>username</label>
+            <input placeholder="username">
+        </template>
+        <template v-else>
+            <label>e-mail</label>
+            <input placeholder="e-mail">
+        </template>
+    </div>
+    <!-- app4 -->
+    <b>key值控制元素是否可重用</b>
+    <div id="app4">
+        <template v-if=" loginType === 'us' ">
+            <label>username</label>
+            <input placeholder="username" key='username'>
+        </template>
+        <template v-else>
+            <label>e-mail</label>
+            <input placeholder="e-mail" key="e-mail">
+        </template>
+    </div>
+    <!-- app5 -->
+    <div id="app5" v-show='ok'>
+            <h1>v-show</h1>
+            <p>demo</p>
+    </div>
+    <script type="text/javascript">
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            ok: true
+        }
+    });
+
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            num: Math.random()
+        }
+    });
+    /**
+     * 使用key控制元素的可重用
+     * vue尝试尽可能高效的渲染元素，通常会复用已有元素而不是重头开始渲染
+     * @type {Vue}
+     */
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            loginType: 'username'
+        }
+    });
+    /**
+     * 元素是否重用，使用属性 key进行控制
+     * key必须拥有唯一值
+     * 若是不带key属性，则默认 元素可重用
+     */
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            loginType: 'us'
+        }
+    });
+/**
+ * v-show的元素会始终渲染并保持在DOM中
+ * 通过display属性来改变元素的显示和
+ * @type {Vue}
+ */
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            ok: true
+        }
+    });
+    </script>
 </body>
+
 </html>
