@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es6-class</title>
+</head>
+<body>
+	<!-- http://www.cnblogs.com/rock-roll/p/5692891.html  参考网址 -->
+
+	<script type="text/javascript">
+	class People{
+		constructor (name,age,gender){
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		}
+
+		say(){
+			console.log(this.name);
+			console.log(this.age);
+			console.log(this.gender);
+
+			return this.name;
+		}
+	}
+
+	class Student extends People {
+		constructor(name,age,gender,skill){
+			super(name,age,gender);
+			this.skill = skill;
+		}
+		saySkill(){
+			console.log(this.skill);
+			return this.skill;
+		}
+	}
+
+	let nordon = new Student('nordon',20,'male','computer');
+	nordon.saySkill();
+	nordon.say();
+
+	console.log(nordon.__proto__ == Student.prototype);
+	console.log(Student.__proto__ == People);
+
+
+	/**
+	 * 箭头函数
+	 */
+	var obj = {
+		demo1 (){
+			window.setTimeout(function(){
+				console.info('普通函数',this);
+			},100);
+		},
+		demo2 (){
+			window.setTimeout(()=>{
+				console.info('箭头函数',this);
+			},100);
+		}
+	}
+	obj.demo1();
+	obj.demo2();
+	</script>
+</body>
+</html>

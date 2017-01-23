@@ -10,16 +10,32 @@
 <body>
     <!-- app -->
     <div id="app1">
-	<my-component></my-component>
+        <my-component></my-component>
     </div>
     <!-- app -->
-    <div id="app2"></div>
+    <div id="app2">
+        <my-component2></my-component2>
+    </div>
     <!-- app -->
-    <div id="app3"></div>
+    <div id="app3">
+        <my-component3></my-component3>
+        <my-component3></my-component3>
+        <my-component3></my-component3>
+    </div>
     <!-- app -->
-    <div id="app4"></div>
+    <div id="app4">
+        <div>
+            <input v-model="parentMsg">
+            <br>
+            <child v-bind:message="parentMsg"></child>
+        </div>
+    </div>
     <!-- app -->
-    <div id="app5"></div>
+    <div id="app5">
+        <ol>
+            <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
     <!-- app -->
     <div id="app6"></div>
     <!-- app -->
@@ -33,15 +49,101 @@
     <script type="text/javascript">
     /**
      * 全局组件--Vue.component
-     * 		必须在初始化根实例之前注册组件
+     *      必须在初始化根实例之前注册组件
      * @type {String}
      */
-    Vue.component('my-component',{
-    	template:'<div>a component</div>'
-    })
-    var app1 = new Vue({
-    	el:'#app1'
+    Vue.component('my-component', {
+        template: '<div>a component</div>'
     });
+    var app1 = new Vue({
+        el: '#app1'
+    });
+
+    /**
+     * 局部组件
+     * 无需在全局注册每个组件
+     *     --通过使用组件实例选项注册，可以使组件仅在另外一个实例或组件的作用域中可用
+     */
+    var Child = {
+        template: '<div>a custom component</div>'
+    }
+    var app2 = new Vue({
+        el: '#app2',
+        components: {
+            'my-component2': {
+                template: '<div>a custom ChildChild  component</div>'
+            }
+        }
+    });
+
+    /**
+     * data 必须是函数
+     */
+    var data = {
+        counter: 0
+    }
+
+    Vue.component('my-component3', {
+        template: '<button v-on:click="counter += 1">{{counter}}</button>',
+        data: function() {
+            // return data;
+            return {
+                counter: 0
+            }
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#app3'
+    });
+
+    /**
+     * 父子组件关系：props down, events up
+     *     --父组件通过props向下传递数据给子组件
+     *     --子组件通过events给父组件发送消息
+     */
+    /**
+     * 组件实例的作用域是独立的
+     *     --props是父组件用来船渡数据的一个自定义属性
+     */
+    Vue.component('child', {
+        // camelCase in JavaScript
+        props: ['message'],
+        template: '<span>{{ message }}</span>'
+    })
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            parentMsg: 'sdsd'
+        }
+    });
+    /**
+     * prop是单向绑定的：
+     *     --当父组件的属性变化时，将传导给子组件，但是不会反过来
+     *     --为了防止子组件无疑修改父组件的状态
+     *当父组件更新时，子组件的所有prop都会更新为最新值
+     *      --不应该在子组件内部改变prop
+     *常见的两种改变prop的情况
+     *      --prop作为初始值传入，子组件之后只是将它的初始值作为本地数据初始值使用
+     *      --prop作为需要被转变的原始值传入
+     * @type {Vue}
+     */
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+    new Vue({
+        el: '#app5',
+        data: {
+            sites: [{
+                text: 'Runoob'
+            }, {
+                text: 'Google'
+            }, {
+                text: 'Taobao'
+            }]
+        }
+    })
     </script>
 </body>
 
