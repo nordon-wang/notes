@@ -46,6 +46,12 @@
     <div id="app9"></div>
     <!-- app -->
     <div id="app10"></div>
+    <h3>#使用props传递数据</h3>
+<div id="dr01">
+    <div>组件实例的作用域是孤立的。这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 props 把数据传给子组件。</div>
+    <br />
+    <childs msg="hello, vue.js!"></childs>
+</div>
     <script type="text/javascript">
     /**
      * 全局组件--Vue.component
@@ -143,7 +149,50 @@
                 text: 'Taobao'
             }]
         }
-    })
+    });
+
+    /**
+     * prop验证
+     *     组件可以为props指定验证要求
+     */
+    Vue.component('yz',{
+        props:{
+            pa:Number,
+            pb:[Number,String],
+            pc:{
+                type:String,
+                required:true
+            },
+            pd:{
+                type:Number,
+                default:100
+            },
+            pe:{
+                type:Object,
+                default:function(){
+                    return {
+                        message : 'hello'
+                    }
+                }
+            },
+            pf:{
+                validator:function(value){
+                    return value > 10;
+                }
+            }
+        },
+        template:'<b></b>'
+    });
+Vue.component("childs", {
+    //声明props属性
+    props: ['msg'],
+    //props可以用在模板内
+    //可以用"this.msg"设置
+    template: '<div>msg: {{msg}}</div>'
+});
+var dr01 = new Vue({
+    el: "#dr01",
+});
     </script>
 </body>
 

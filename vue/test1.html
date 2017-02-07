@@ -3,20 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Document</title>]
+    <style type="text/css">
+        
+    </style>
     <script type="text/javascript" src='js/vue.min.js'></script>
-    <script type="text/javascript" src='js/vuex.min.js'></script>
+    <!-- <script type="text/javascript" src='js/vuex.min.js'></script> -->
 </head>
 
 <body>
-   <div id="app">{{message}}</div>
+   <!-- app -->
+    <div id="app1">
+        <my-c></my-c>
+    </div>
+    <!-- app -->
+    <div id="app2"></div>
+    <!-- app -->
+    <div id="app3"></div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5"></div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
     <script type="text/javascript">
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'hello vue'
-        }
+    var mc = Vue.extend({
+        template:'<b>component</b>'
     });
+    Vue.component('my-c',mc);
+
+    new Vue({
+        el:'#app1'
+    })
+
     </script>
 </body>
 
