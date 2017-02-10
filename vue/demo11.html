@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- app -->
+	<div id="app1">
+		<my-com></my-com>
+		{{msg}}
+	</div>
+	<!-- app -->
+	<div id="app2">
+		<table>
+			<my-component></my-component>
+		</table>
+	</div>
+	<!-- app -->
+	<div id="app3">
+		<my-data></my-data>
+	</div>
+	<!-- app -->
+	<div id="app4">
+		<simple-count></simple-count>
+		<simple-count></simple-count>
+		<simple-count></simple-count>
+	</div>
+	<!-- app -->
+	<div id="app5">
+		<childs msg='hello'></childs>
+	</div>
+	<!-- app -->
+	<div id="app6"></div>
+	<!-- app -->
+	<div id="app7"></div>
+	<!-- app -->
+	<div id="app8"></div>
+	<!-- app -->
+	<div id="app9"></div>
+	<!-- app -->
+	<div id="app10"></div>
+	<!-- app -->
+	<div id="app11"></div>
+	<!-- app -->
+	<div id="app12"></div>
+	<!-- app -->
+	<div id="app13"></div>
+	<script type="text/javascript">
+	Vue.component('my-com',{
+		template:'<h1>sdsdsd</h1>'
+	})
+
+	var s = new Vue({
+		el:'#app1',
+		data:{
+			msg:'sdsada'
+		}
+	});
+
+	var Child = {
+		template:'<h1>ChildChild</h1>'
+	}
+
+	var app2 = new Vue({
+		el:'#app2',
+		components:{
+			'my-component':Child
+		}
+	});
+	/**
+	 * 使用组件时，大多数可以传入到Vue构造器中的选项可以在注册组件时使用
+	 * 		--data是一个例外，data必须是函数
+	 */
+	Vue.component('my-data',{
+		template:'<h1>{{msg}}</h1>',
+		data (){
+			return {
+				msg:'data必须是函数'
+			};
+		}
+	});
+	new Vue({
+		el:'#app3'
+	});
+
+	var data = {
+		counter:0
+	}
+	/*Vue.component('simple-count',{
+		template:'<button v-on:click="counter += 1">{{counter}}</button>',
+		data:function(){
+			return data;
+		}
+	});*/
+	Vue.component('simple-count',{
+		template:'<button v-on:click="counter += 1">{{counter}}</button>',
+		data (){
+			return {
+				counter:0
+			};
+		}
+	});
+
+	new Vue({
+		el:'#app4'
+	});
+
+	/**
+	 * 父组件给子组件传递数据，子必须告诉父其内部发生的变化
+	 * 		--父子组件关系；props down,event up
+	 * 		--父通过props传递数据给子
+	 * 		--子通过event发送消息给父
+	 * 	--组件实例的作用域是孤立的
+	 *props是父组件传递数据的自定义属性，子组件需要显示的用props选项声明props
+	 */
+	Vue.component('childs',{
+		props:['msg','sd'],
+		template:'<b>{{msg}}{{sd}}</b>'
+	});
+	new Vue({
+		el:'#app5'
+	});
+	</script>
+</body>
+</html>
