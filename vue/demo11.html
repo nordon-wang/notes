@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>组件</title>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+    <script type="text/javascript" src="js/vue.min.js"></script>
 </head>
 <body>
 	<!-- app -->
@@ -29,12 +30,23 @@
 	</div>
 	<!-- app -->
 	<div id="app5">
-		<childs msg='hello'></childs>
+		<childs msg='hello' sd="sdsd"></childs>
+		<camle my-msg="nodon"></camle>
+		<div>
+		</div>
 	</div>
 	<!-- app -->
-	<div id="app6"></div>
+	<div id="app6">
+		<input v-model='ps'>
+		<br>
+		<childp v-bind:my-msgs="ps"></childp>
+		<br>
+		<childp v-bind:my-msgs='ps'></childp>
+	</div>
 	<!-- app -->
-	<div id="app7"></div>
+	<div id="app7">
+		<initp init-p="nor12"></initp>
+	</div>
 	<!-- app -->
 	<div id="app8"></div>
 	<!-- app -->
@@ -119,9 +131,54 @@
 		props:['msg','sd'],
 		template:'<b>{{msg}}{{sd}}</b>'
 	});
+	Vue.component('camle',{
+		props:['myMsg'],
+		template:'<b>{{myMsg}}</b>'
+	});
 	new Vue({
 		el:'#app5'
 	});
+
+	Vue.component('childp',{
+		props:['myMsgs'],
+		template:'<b>{{myMsgs}}</b>'
+	});
+	new Vue({
+		el:'#app6',
+		data:{
+			ps:''
+		}
+	});
+
+	/**
+	 * prop是单向数据绑定的，为了防止子组件修改父组件状态
+	 * 	-prop作为初始值传入，子组件之后只是将它的初始值作为本地数据的初始值使用
+	 * 	-prop作为需要被转变的原始值传入
+	 */
+	Vue.component('initp',{
+		props:['initP'],
+		template:'<h2>{{counter}}</h2>',
+		data (){
+			return {
+				counter : this.initP
+			}
+		}
+	});
+
+	new Vue({
+		el:'#app7'
+	})
+
+	Vue.component('com',{
+		props:['size'],
+		template:'<h2>{{size}}</h2>',
+		computed:{
+			ns (){
+				this.size += 'nor';
+				return this.size;
+			}
+		}
+	})
 	</script>
 </body>
 </html>
