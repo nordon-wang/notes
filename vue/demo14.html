@@ -11,11 +11,30 @@
     <!-- app -->
     <div id="app1"></div>
     <!-- app -->
-    <div id="app2"></div>
+    <div id="app2">
+        <h1>我是父组件的标题</h1>
+        <my-com>
+            <p>这是一些初始内容</p>
+            <p>这是更多的初始内容</p>
+        </my-com>
+    </div>
     <!-- app -->
-    <div id="app3"></div>
+    <div id="app3">
+        <h1>我是父组件的标题</h1>
+        <my-com-single>
+            <p>这是一些初始内容</p>
+            <p>这是更多的初始内容</p>
+        </my-com-single>
+    </div>
     <!-- app -->
-    <div id="app4"></div>
+    <div id="app4">
+        <app-layout>
+            <h1 slot="header">这里可能是一个页面标题</h1>
+            <p>主要内容的一个段落。</p>
+            <p>另一个主要段落。</p>
+            <p slot="footer">这里有一些联系信息</p>
+        </app-layout>
+    </div>
     <!-- app -->
     <div id="app5"></div>
     <!-- app -->
@@ -31,42 +50,92 @@
     <script type="text/javascript">
     /**
      * watch
-     * 	--不要使用箭头函数，箭头函数会绑定父级的上下文，this将不能指向vue的实例对象
+     *  --不要使用箭头函数，箭头函数会绑定父级的上下文，this将不能指向vue的实例对象
      */
     var app1 = new Vue({
-    	el:'#app1',
-    	data:{
-    		a:1,
-    		b:2,
-    		c:3
-    	},
-    	watch:{
-    		'a':function(v,ov){
-    			console.log(v,ov);
-    		},
-    		'b':'sm',
-    		c:{
-    			handler:function(val,oval){
-    				console.log(val,oval);
-    			},
-    			deep:true
-    		}
-    	},
-    	methods:{
-    		sm (){
-    			console.log(this.b);
-    		}
-    	}
+        el: '#app1',
+        data: {
+            a: 1,
+            b: 2,
+            c: 3
+        },
+        watch: {
+            'a': function(v, ov) {
+                console.log(v, ov);
+            },
+            'b': 'sm',
+            c: {
+                handler: function(val, oval) {
+                    console.log(val, oval);
+                },
+                deep: true
+            }
+        },
+        methods: {
+            sm() {
+                console.log(this.b);
+            }
+        }
     })
 
     /**
      * 使用slot分发内容
-     * 	--1.子组件不知道自己的挂载点会有什么内容，挂载点的内容是由父组件决定的
-     * 	--2.子组件可能有自己的模板
+     *  --1.子组件不知道自己的挂载点会有什么内容，挂载点的内容是由父组件决定的
+     *  --2.子组件可能有自己的模板
      *为了使组件可以组合，需要一种方式来混合父组件的内容和子组件自己的模板
      *这个过程称为-->内容分发
      *使用特殊的<slot>元素作为原始内容的插槽
      */
+
+    /**
+     * 内容的编译作用域
+     *   --父组件模板的内容在父组件的作用域内编译，子组件模板的内容在子组件内编译
+     */
+    /**
+     *单个slot
+     *  --若子组件无slot，父组件的内容将会被丢弃
+     */
+    Vue.component('my-com-single', {
+        template: '<div><h2>若子组件无slot，父组件的内容将会被丢弃1111</h2><h2>若子组件无slot，父组件的内容将会被丢弃2222</h2></div>'
+    })
+
+    new Vue({
+        el: '#app3'
+    })
+    Vue.component('my-com', {
+        template: '<div><h2>我是子组件的标题</h2><slot>只有在没有要分发的内容时才会显示。</slot></div>'
+    })
+
+    new Vue({
+        el: '#app2'
+    })
+
+    /**
+     * 具名slot
+     *    --<slot>元素可以用一个特殊的属性name来配置如何分发内容
+     *    --slot可以具有不同的名字，
+     *    --具名slot将匹配片段中有对应slot特性的元素
+     *可以有一个匿名slot，它是默认slot
+     *     --找不到匹配的内容片段的备用插槽
+     *     --若没有默认的slot，找不到匹配的内容片段将会被抛弃
+     */
+    Vue.component('juming-slot', {
+        template: `<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>`
+    })
+
+    new Vue({
+        el: "#app4"
+    })
     </script>
 </body>
 
