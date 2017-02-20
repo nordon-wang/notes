@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app1" >
+    {{a}}  {{b}}
+    </div>
+    <!-- app -->
+    <div id="app2"></div>
+    <!-- app -->
+    <div id="app3"></div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5">
+    </div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+    <script type="text/javascript">
+    /**
+     * 模型model只是普通js对象，修改它则更新视图view，
+     * 因此其状态管理建党且直观
+     * 每个组件实例都有对应的watcher实例对象，它会在组件渲染的过程中把属性记录为依赖
+     * 当依赖项的setter被调用时，会通知watcher重新计算，以致关联的组件更新
+     * 
+     */
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            a: 1,
+            b:''
+        },
+        watcher: {
+
+        },
+        methods: {}
+    });
+    app1.b = 3;
+    // Vue.set(app1.someObject,'b',3);
+    </script>
+</body>
+
+</html>
