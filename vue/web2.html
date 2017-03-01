@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <childs v-bind:text='message'></childs>
+    </div>
+    <!--  -->
+    <div id="app2">
+        <child2 v-bind:text='msg'></child2>
+    </div>
+    <!--  -->
+    <div id="app3">
+        <h3>
+            <button v-on:click='add'>+</button>
+            <button v-on:click='del'>-</button>
+        </h3>
+        <b class="num">{{count}}</b>
+        <h4><childss count="1"></childss></h4>
+        <h4><childss :count="count"></childss></h4>
+    </div>
+    <!--  -->
+    <div id="app4">
+        <ul>
+            <li is="individual-comment" v-for="comment in comments" v-bind:commentpost='comment'></li>
+        </ul>
+        <input v-model="newComment" v-on:keyup.enter='addComment' placeholder="add">
+    </div>
+    <!--  -->
+    <div id="app5">
+        <h2>We can use slots to populate content</h2>
+        <app-child>
+            <h3>This is slot number one</h3>
+        </app-child>
+        <app-child>
+            <h3>This is slot number two</h3>
+            <small>I can put more info in, too!</small>
+        </app-child>
+    </div>
+    <script type="text/x-template" id="childarea">
+  <div class="child">
+    <slot></slot>
+    <p>It's a veritable slot machine!<br> 
+    Ha ha aw</p>
+  </div>
+</script>
+    <script type="text/javascript">
+    Vue.component('childs', {
+        props: ['text'],
+        template: `<div>{{ text }}</div>`
+    });
+    new Vue({
+        el: "#app1",
+        data() {
+            return {
+                message: 'hello wy'
+            }
+        }
+    });
+    // 
+    Vue.component('child2', {
+        props: {
+            text: {
+                type: String,
+                required: true
+            }
+        },
+        template: `<div>{{ text }}</div>`
+    });
+    new Vue({
+        el: "#app2",
+        data() {
+            return {
+                msg: 1212
+            }
+        }
+    });
+    // 
+    Vue.component('childss', {
+        props: {
+            count: {
+                type: Number,
+                required: true
+            }
+        },
+        template: `<div class="num"> {{ count }}</div>`
+    })
+    new Vue({
+        el: '#app3',
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            add() {
+                this.count++;
+            },
+            del() {
+                this.count--;
+            }
+        }
+    });
+    // 
+    Vue.component('individual-comment', {
+        template: `<li> {{ commentpost }} </li>`,
+        props: ['commentpost']
+    })
+    new Vue({
+            el: '#app4',
+            data: {
+                newComment: '',
+                comments: [
+                    'Looks great Julianne!',
+                    'I love the sea',
+                    'Where are you at?'
+                ]
+            },
+            methods: {
+                addComment() {
+                    this.comments.push(this.newComment);
+                    this.newComment = ''
+                }
+            }
+        })
+        // 
+    const Child = {
+        template: '#childareas'
+    }
+    new Vue({
+        el: '#app5',
+        components: {
+            appChild: child
+        }
+    })
+    </script>
+
+</html>

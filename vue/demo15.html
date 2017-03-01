@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+	<!-- app -->
+	<div id="app1">
+		 <select v-on:change="clickSelect">
+            <option value="true">显示</option>
+            <option value="false">隐藏</option>
+        </select>
+        <h1 v-show='styles.showOrHide'>显示</h1>
+        <h1 v-show='!styles.showOrHide'>隐藏</h1>
+	</div>
+	<!-- app -->
+	<div id="app2"></div>
+	<!-- app -->
+	<div id="app3"></div>
+	<!-- app -->
+	<div id="app4"></div>
+	<!-- app -->
+	<div id="app5"></div>
+	<!-- app -->
+	<div id="app6"></div>
+	<!-- app -->
+	<div id="app7"></div>
+	<!-- app -->
+	<div id="app8"></div>
+	<!-- app -->
+	<div id="app9"></div>
+	<!-- app -->
+	<div id="app10"></div>
+	<script type="text/javascript">
+	var app1 = new Vue({
+		el:'#app1',
+		data:{
+			styles:{
+				showOrHide:true
+			}
+		},
+		methods:{
+			clickSelect:function(v){
+				this.styles.showOrHide = !this.styles.showOrHide;
+			}
+		}
+	})
+
+	</script>
+</body>
+</html>
