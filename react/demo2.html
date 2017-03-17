@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+
+<body>
+</body>
+
+<div id="app1"></div>
+<div id="app2"></div>
+<div id="app3"></div>
+<div id="app4"></div>
+<div id="app5"></div>
+
+<script type="text/babel">
+
+var MyTitle = React.createClass({
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+  },
+
+  render: function() {
+     return <h1> {this.props.title} </h1>;
+   }
+});
+
+var data = '123';
+
+ReactDOM.render(
+  <MyTitle title={data} />,
+  document.getElementById('app1')
+);
+
+var MyDefaultTitle = React.createClass({
+	getDefaultProps : function(){
+	return {
+			title : 'nordon good morning'
+		};
+	},
+	render(){
+		return <h1>{this.props.title}</h1>
+	}
+});
+
+ReactDOM.render(
+	<MyDefaultTitle />,
+	document.getElementById('app2')
+);
+
+var RefComponent = React.createClass({
+  handleClick() {
+  	console.log(this.refs.myTextInput.value);
+  	console.log(this.refs.myDiv.innerText);
+    this.refs.myTextInput.focus();
+  },
+  render() {
+    return (
+      <div>
+        <input type="text" ref="myTextInput" />
+        <input type="password" ref="myTextInputs" />
+        <div ref='myDiv'>sdasdas</div>
+        <input type="button" value="Focus the text input" onClick={this.handleClick} />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+	<RefComponent />,
+	document.getElementById('app3')
+);
+
+var LikeButton = React.createClass({
+	getInitialState(){
+		return {liked:true};
+	},
+	handleClick (event){
+		this.setState({liked: !this.state.liked});
+	},
+	render(){
+		var text = this.state.liked ? 'like' : 'haven\'t liked';
+		return (
+			<p onClick={this.handleClick}>
+				you {text} this click to toggle
+			</p>
+		)
+	}
+});
+
+ReactDOM.render(
+	<LikeButton />,
+	document.getElementById('app4')
+);
+
+
+var Input = React.createClass({
+	getInitialState(){
+		return {value:'hello nordon'};
+	},
+	handleChange(event){
+		this.setState({value : event.target.value});
+	},
+	render(){
+		var value = this.state.value;
+		return (
+			<div>
+				<input type="text" value={value} onChange={this.handleChange} />
+				<p>{value}</p>
+			</div>
+		);
+	}
+});
+
+ReactDOM.render(<Input />,document.getElementById('app5'));
+
+
+</script>
+</html>

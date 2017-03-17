@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app1">
+        <button v-on:click="show = !show">toggle</button>
+        <transition name="fade">
+            <p v-if="show"> hello</p>
+        </transition>
+    </div>
+    <!-- app -->
+    <div id="app2">
+        <button v-on:click="show = !show">toggle</button>
+        <transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated shake">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    <!-- app -->
+    <div id="app3">
+		<button v-if="isEdit" key='save'> save</button>
+		<button v-else key="edit"> edit</button>
+    </div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5"></div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+    <script type="text/javascript" src="javascript/animate.js"></script>
+</body>
+
+</html>

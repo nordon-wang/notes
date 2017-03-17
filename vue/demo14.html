@@ -34,9 +34,13 @@
             <p>另一个主要段落。</p>
             <p slot="footer">这里有一些联系信息</p>
         </app-layout>
+        <h1 v-show="msg == 'wy'">h1h1h {{ms}} {{msg}}</h1>
     </div>
     <!-- app -->
-    <div id="app5"></div>
+    <div id="app5">
+      <input type="text" name="" v-model="msg">
+      <input type="text" :value="msg" name="">
+    </div>
     <!-- app -->
     <div id="app6"></div>
     <!-- app -->
@@ -134,7 +138,18 @@
     })
 
     new Vue({
-        el: "#app4"
+        el: "#app4",
+        data:{
+          msg:'wy',
+          ms:this.msg
+        }
+    })
+
+     new Vue({
+        el: "#app5",
+        data:{
+          msg:'wy'
+        }
     })
     </script>
 </body>

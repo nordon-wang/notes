@@ -16,9 +16,30 @@
         <h1 v-show='!styles.showOrHide'>隐藏</h1>
 	</div>
 	<!-- app -->
-	<div id="app2"></div>
+	<div id="app2">
+		<transition>
+		  <button v-if="isEditing" key="save">
+		    Save
+		  </button>
+		  <button v-else key="edit">
+		    Edit
+		  </button>
+		</transition>
+
+		<transition>
+		  <button v-bind:key="isEditing">
+		    {{ isEditing ? 'Save' : 'Edit' }}
+		  </button>
+		</transition>
+	</div>
 	<!-- app -->
-	<div id="app3"></div>
+	<div id="app3">
+		<transition>
+			<button v-bind:key="docState">
+				{{ buttonMsg }}
+			</button>
+		</transition>
+	</div>
 	<!-- app -->
 	<div id="app4"></div>
 	<!-- app -->
@@ -44,6 +65,34 @@
 		methods:{
 			clickSelect:function(v){
 				this.styles.showOrHide = !this.styles.showOrHide;
+			}
+		}
+	})
+
+	var app2 = new Vue({
+		el:'#app2',
+		data (){
+			return {
+				isEditing:true
+			}
+		}
+	})
+
+	var app3 = new Vue({
+		el:"#app3",
+		data (){
+			return{
+				docState:'save'
+			};
+		},
+		computed:{
+			buttonMsg(){
+				switch(this.docState) {
+					case 'save':
+						return 'save';
+					case 'edit':
+						return 'edit'
+				}
 			}
 		}
 	})
