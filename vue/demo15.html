@@ -41,7 +41,11 @@
 		</transition>
 	</div>
 	<!-- app -->
-	<div id="app4"></div>
+	<div id="app4">
+		<div v-on:mousedown.self="warn('demo warn',$event)" v-on:mouseup.self="warns('demo warn',$event)" :style="styles">btn
+			<h1>1111</h1>
+		</div>
+	</div>
 	<!-- app -->
 	<div id="app5"></div>
 	<!-- app -->
@@ -97,6 +101,28 @@
 		}
 	})
 
+	new Vue({
+		el:'#app4',
+		data (){
+			return {
+				styles:{
+					width:'200px',
+					height:'200px',
+					backgroundColor:"#ff0"
+				}
+			}
+		},
+		methods:{
+			warn (msg,event){
+				if (event) {
+					console.log('mousedown',event);
+				}
+			},
+			warns (msg,event){
+				console.log('mouseup',event);
+			}
+		}
+	})
 	</script>
 </body>
 </html>
