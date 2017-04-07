@@ -40,7 +40,20 @@ const configMore = {
 module.exports = configObj;
 module.exports = configMore;
 
+/**
+ * 配置output属性最低要求：将其值设置为一个对象
+ *  --1.编译文件的文件名，首推：mian.js || bundle.js || index.js
+ *  --2.output.path 对应一个绝对路径，是一次性打包的目录
+ */
 
+const configo1 = {
+    output:{
+        filename:'main.js||bundle.js||index.js',
+        path:'/home/demo.js'
+    }
+}
+
+module.exports = configo1;
 
 
 
