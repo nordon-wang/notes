@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app1">
+        <p> {{ 1 + 1}} </p>
+        <my-com message="hello bing"></my-com>
+        <h1>{{msg}}</h1>
+        <my-com-child></my-com-child>
+        <input type="" v-model="parentMsg" name="" value=""> <br>
+        <parent-msg :msg="parentMsg"></parent-msg>
+
+         <my-com message="1"></my-com>
+         <my-com :message="1"></my-com>
+    </div>
+    <!-- app -->
+    <div id="app2">
+        <my-com message="second props"></my-com>
+        <h1>{{msg2}}</h1>
+    </div>
+    <!-- app -->
+    <div id="app3">
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+    </div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5"></div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+    <script type="text/javascript">
+        Vue.component('my-com', {
+            props:['message'],
+            template: '<div>componnets parent  {{ message + 2 }}</div>'
+        });
+
+        Vue.component('parent-msg',{
+            props:['msg'],
+            template:"<b> {{msg}}</b>"
+        })
+
+        var Child = {
+            template: '<h1>Child component</h1>'
+        }
+
+        new Vue({
+            el: "#app1",
+            data() {
+                return {
+                    msg: 'wy',
+                    parentMsg:"parentMsg"
+                }
+            },
+            components: {
+                'my-com-child': Child
+            }
+        });
+
+        new Vue({
+            el: "#app2",
+            data() {
+                return {
+                    msg2: 'nordon'
+                }
+            }
+        });
+
+        var data = { counter: 0 }
+        Vue.component('simple-counter', {
+            template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+            data: function () {
+                return {
+                    counter:0
+                }
+            }
+        })
+
+        new Vue({
+            el:"#app3"
+        })
+    </script>
+</body>
+
+</html>

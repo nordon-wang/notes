@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/iview.min.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app1">
+        <h1>{{msg}}</h1>
+        div.innerHTML = '\n
+        <Modal ' + props + ' v-model="visible" :width="width" :scrollable="scrollable">\n
+            <div class="' + prefixCls + '">\n
+                <div class="' + prefixCls + '-head">\n
+                    <div class="' + prefixCls + '-head-title" v-html="title"></div>\n </div>\n
+                <div class="' + prefixCls + '-body">\n
+                    <div :class="iconTypeCls"><i :class="iconNameCls"></i></div>\n
+                    <div v-html="body"></div>\n </div>\n
+                <div class="' + prefixCls + '-footer">\n
+                    <i-button type="text" size="large" v-if="showCancel" @click.native="cancel">{{ localeCancelText }}</i-button>\n
+                    <i-button type="primary" size="large" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</i-button>\n </div>\n </div>\n </Modal>\n ';
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app1",
+            data: {
+                msg: "wy"
+            }
+        })
+    </script>
+</body>
+
+</html>
