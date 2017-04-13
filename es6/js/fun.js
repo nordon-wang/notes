@@ -22,4 +22,5 @@ function fech(aaaaa){
 }
 
 fech();
-console.log();
+const a = require('./obj.js');
+console.log(a.foo);

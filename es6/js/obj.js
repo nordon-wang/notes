@@ -127,6 +127,16 @@ eval( 'var result = obj4.' + propName )
 var x = 5;
 var str = "if (x == 5) {console.log('z is 42'); z = 42;} else z = 0;";
 
-console.log('z is ', eval(str));
+// console.log('z is ', eval(str));
 
+
+function A() {
+    this.foo = "aaaa";
+}
+
+if(!global._foo){
+    global._foo = new A();
+}
+
+module.exports = global._foo;
 
