@@ -17,8 +17,8 @@
         <input type="" v-model="parentMsg" name="" value=""> <br>
         <parent-msg :msg="parentMsg"></parent-msg>
 
-         <my-com message="1"></my-com>
-         <my-com :message="1"></my-com>
+        <my-com message="1"></my-com>
+        <my-com :message="1"></my-com>
     </div>
     <!-- app -->
     <div id="app2">
@@ -47,13 +47,13 @@
     <div id="app10"></div>
     <script type="text/javascript">
         Vue.component('my-com', {
-            props:['message'],
+            props: ['message'],
             template: '<div>componnets parent  {{ message + 2 }}</div>'
         });
 
-        Vue.component('parent-msg',{
-            props:['msg'],
-            template:"<b> {{msg}}</b>"
+        Vue.component('parent-msg', {
+            props: ['msg'],
+            template: "<b> {{msg}}</b>"
         })
 
         var Child = {
@@ -65,7 +65,7 @@
             data() {
                 return {
                     msg: 'wy',
-                    parentMsg:"parentMsg"
+                    parentMsg: "parentMsg"
                 }
             },
             components: {
@@ -87,13 +87,13 @@
             template: '<button v-on:click="counter += 1">{{ counter }}</button>',
             data: function () {
                 return {
-                    counter:0
+                    counter: 0
                 }
             }
         })
 
         new Vue({
-            el:"#app3"
+            el: "#app3"
         })
     </script>
 </body>
