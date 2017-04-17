@@ -10,7 +10,7 @@
 <body>
     <!-- app -->
     <div id="app1">
-        <p> {{ 1 + 1}} </p>
+        <my-com :message="1">msg:{{msg}}</my-com>
         <my-com message="hello bing"></my-com>
         <h1>{{msg}}</h1>
         <my-com-child></my-com-child>
@@ -30,15 +30,42 @@
         <simple-counter></simple-counter>
         <simple-counter></simple-counter>
         <simple-counter></simple-counter>
+        <p style="border:1px solid #f00;"></p>
+
     </div>
     <!-- app -->
-    <div id="app4"></div>
+    <div id="app4">
+        <p>{{msg}}</p>
+        <input type="text" v-model="sd">
+        <example :prop-a='sd'></example>
+        <example></example>
+    </div>
     <!-- app -->
-    <div id="app5"></div>
+    <div id="app5">
+        <b>{{fatherNum}}</b>
+        <on-emit v-on:childclick="fatherclick"></on-emit>
+        <on-emit v-on:childclick="fatherclick"></on-emit>
+    </div>
     <!-- app -->
-    <div id="app6"></div>
+    <div id="app6">
+        <div>
+            <h1>我是父组件的标题</h1>
+            <fathers>
+                <p>这是一些初始内容</p>
+                <p>这是更多的初始内容</p>
+            </fathers>
+        </div>
+        <childs></childs>
+    </div>
     <!-- app -->
-    <div id="app7"></div>
+    <div id="app7">
+        <app-layout>
+            <h1 slot="header">这里可能是一个页面标题</h1>
+            <p>主要内容的一个段落。</p>
+            <p>另一个主要段落。</p>
+            <p slot="footer">这里有一些联系信息</p>
+        </app-layout>
+    </div>
     <!-- app -->
     <div id="app8"></div>
     <!-- app -->
@@ -46,13 +73,137 @@
     <!-- app -->
     <div id="app10"></div>
     <script type="text/javascript">
+        Vue.component('app-layout', {
+            template: `<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>`
+        })
+
+        new Vue({
+            el: "#app7"
+        })
+
+
+
+
+
+
+
+
+        Vue.component('childs', {
+            template: `<div>
+  <h2>我是子组件的标题childs</h2>`
+        });
+        Vue.component('fathers', {
+            template: `<div>
+  <h2>我是子组件的标题</h2>
+  <slot>
+    只有在没有要分发的内容时才会显示。
+  </slot>
+</div>`
+        });
+
+        new Vue({
+            el: "#app6",
+            components: 'childs'
+        })
+
+        /**
+         * 非父子组件通信
+         *  -有时两个组件也需要通信，又非父子组件
+         *  --简单场景-使用一个空的Vue实例作为中央事件总线
+        */
+        let bus = new Vue();
+
+        bus.$emit('id-sel', 1);
+
+        bus.$on('id-sel', function (id) {
+            console.log(id);
+        });
+
+
+        Vue.component('on-emit', {
+            template: '<button v-on:click="childclick"> {{ childNum }} </button>',
+            data() {
+                return {
+                    childNum: 0
+                };
+            },
+            methods: {
+                childclick() {
+                    this.childNum += 1;
+                    this.$emit('childclick');
+                }
+            }
+        });
+
+        new Vue({
+            el: "#app5",
+            data: {
+                fatherNum: 0
+            },
+            methods: {
+                fatherclick() {
+                    this.fatherNum += 1;
+                }
+            }
+        })
+
+
+
+        Vue.component('example', {
+            props: {
+                propA: {
+                    validaor: function (value) {
+                        return value > 10;
+                    }
+                },
+                propAc: {
+                    type: Number,
+                    default: 100
+                }
+            },
+            template: '<p>SAD {{propA}}</p>'
+        })
+
+        new Vue({
+            el: "#app4",
+            data() {
+                return {
+                    msg: 'app4',
+                    sd: '2'
+                };
+            }
+
+        })
+
+
+
         Vue.component('my-com', {
             props: ['message'],
-            template: '<div>componnets parent  {{ message + 2 }}</div>'
+            data() {
+                return {
+                    num: this.message
+                }
+            },
+            template: '<div>componnets parent  {{ num + 2 }}</div>'
         });
 
         Vue.component('parent-msg', {
             props: ['msg'],
+            data() {
+                return {
+                    msgs: this.msg
+                }
+            },
             template: "<b> {{msg}}</b>"
         })
 
