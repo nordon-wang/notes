@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+	<!-- app -->
+	<div id="app1">
+        <p>{{msg}}</p>
+        <component v-bind:is="currentView"></component>
+        <component v-bind:is="homes"></component>
+    </div>
+	<!-- app -->
+	<div id="app2"></div>
+	<!-- app -->
+	<div id="app3"></div>
+	<!-- app -->
+	<div id="app4"></div>
+	<!-- app -->
+	<div id="app5"></div>
+	<!-- app -->
+	<div id="app6"></div>
+	<!-- app -->
+	<div id="app7"></div>
+	<!-- app -->
+	<div id="app8"></div>
+	<!-- app -->
+	<div id="app9"></div>
+	<!-- app -->
+	<div id="app10"></div>
+	<script type="text/javascript">
+
+    const Homes = {
+        template : "<h1> Homes </h1>"
+    }
+
+    new Vue({
+        el:"#app1",
+        data (){
+            return {
+                msg:'ms',
+                currentView:'posts',
+                homes: Homes
+            }
+        },
+        components:{
+            home:{
+                template:'<h1> Home </h1>'
+            },
+            posts:{
+                template:'<h1> posts </h1>'
+            }
+        }
+    })
+    </script>
+</body>
+</html>
