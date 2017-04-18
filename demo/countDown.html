@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+</head>
+
+<body>
+
+    <div id="date">
+
+    </div>
+
+    <div id="date2"></div>
+
+    <!--倒计时-->
+    <div id="counts"></div>
+    <script type="text/javascript">
+        //  Date()返回当前的日期和时间
+        //  getDate() 产看Date对象并返回日期
+        // getDay() 返回星期几
+        // getHours() 返回小时
+        // getMinutes() 返回分钟
+        // getMonths() 返回月份 -- 从0开始
+        // getSeconds() 返回秒数
+        // getTime() 返回毫秒数
+        // getYear() 返回年份
+        // getFullYear() 返回完整格式的年份
+
+        window.onload = function () {
+            // setInterval(setDate, 500);
+            setInterval('setDate()', 500);
+
+            setDate2();
+
+            counts();
+        }
+
+        // 当前时间
+        function setDate() {
+            let date = new Date();
+            let year = date.getFullYear();
+            let months = date.getMonth() + 1;
+            let day = date.getDate();
+            document.getElementById('date').innerHTML = year + '年' + months + '月' + day + '日 : ' + date.getHours() + '时' + date.getMinutes() + '分' + date.getSeconds() + '秒';
+        }
+
+        // 距离高考时间
+        function setDate2() {
+            let date = new Date();
+            let endTime = new Date('2017,6,6');
+            let result = endTime.getTime() - date.getTime();
+
+
+            document.getElementById('date2').innerHTML = Math.ceil(result / (24 * 60 * 60 * 1000)) + '天';
+
+            // console.log(Math.ceil(result / (24 * 60 * 60 * 1000)));
+
+            // console.log(parseInt('123.12'));
+            // console.log(parseFloat('123.12'));
+            // console.log(date.getSeconds());
+            // setTimeout(setDate2,500);
+        }
+
+        // 倒计时
+        function counts() {
+            let date = new Date();
+            let endTime = new Date('2017,6,6');
+            let result = endTime.getTime() - date.getTime();
+
+            let day = parseInt(result / (24 * 60 * 60 * 1000));
+            let hours =  parseInt(result / ( 60 * 60 * 1000) % 24);
+            let minute =  parseInt(result / ( 60  * 1000) % 60);
+            let secounds = parseInt(result /  1000  % 60);
+            // console.log(secounds);
+
+            document.getElementById('counts').innerHTML = day + '天' + hours + '时' + minute + '分' + secounds + '秒';
+
+            setTimeout(counts,500);
+        }
+    </script>
+</body>
+
+</html>
