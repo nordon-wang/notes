@@ -86,3 +86,61 @@ function demo(){
 }
 
 // demo();
+
+let p1 = new Promise(function(resolve,reject){
+    resolve();
+});
+
+let p2 = new Promise(function(resolve,reject){
+    resolve(p1);
+});
+
+/**
+ * p2的状态时由p1决定
+ */
+p2.then(function(){
+    // console.log('p2');
+})
+
+p1.then(function(){
+    // console.log('p1');
+})
+
+let p3 = new Promise(function(resolve,reject){
+    //  reject(new Error('eee'));
+    resolve('sd');
+});
+
+let p4 = new Promise(function(resolve, reject){
+    setTimeout( () => resolve(p2), 1000);
+});
+
+// p4.then( result => console.log(result)).catch( error => console.log(error));
+
+/**
+ * 以下三种写法是一样的
+ */
+p4.then(function(){
+
+}, function(){
+
+});
+ p4.then(function(){
+
+ }).then(function(){
+
+ });
+
+ p4.then(function(){
+
+ }).catch(function(){
+
+ })
+
+//  
+
+
+
+
+
+

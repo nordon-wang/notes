@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>组件</title>
-    <script src="js/vue.min.js"></script>
-    <script src="js/iview.min.js"></script>
+    <meta charset="utf-8">
+    <title>iview example</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
 </head>
 
 <body>
-    <!-- app -->
-    <div id="app1">
-        <h1>{{msg}}</h1>
-        div.innerHTML = '\n
-        <Modal ' + props + ' v-model="visible" :width="width" :scrollable="scrollable">\n
-            <div class="' + prefixCls + '">\n
-                <div class="' + prefixCls + '-head">\n
-                    <div class="' + prefixCls + '-head-title" v-html="title"></div>\n </div>\n
-                <div class="' + prefixCls + '-body">\n
-                    <div :class="iconTypeCls"><i :class="iconNameCls"></i></div>\n
-                    <div v-html="body"></div>\n </div>\n
-                <div class="' + prefixCls + '-footer">\n
-                    <i-button type="text" size="large" v-if="showCancel" @click.native="cancel">{{ localeCancelText }}</i-button>\n
-                    <i-button type="primary" size="large" :loading="buttonLoading" @click.native="ok">{{ localeOkText }}</i-button>\n </div>\n </div>\n </Modal>\n ';
+    <div id="app">
+        <Tabs type="card" closable @on-tab-remove="handleTabRemove">
+            <Tab-pane label="标签1" v-if="t.tab0">标签1的内容</Tab-pane>
+            <Tab-pane label="标签2" v-if="t.tab1">标签2的内容</Tab-pane>
+            <Tab-pane label="标签3" v-if="t.tab2">标签3的内容</Tab-pane>
+            <Tab-pane label="标签4" v-if="t.tab3">标签4的内容</Tab-pane>
+            <Tab-pane label="标签5" v-if="t.tab4">标签5的内容</Tab-pane>
+            <Tab-pane label="标签6" v-if="t.tab5">标签6的内容</Tab-pane>
+            <Tab-pane label="标签7" v-if="t.tab6">标签7的内容</Tab-pane>
+            <Tab-pane label="标签8" v-if="t.tab7">标签8的内容</Tab-pane>
+            <Tab-pane label="标签9" v-if="t.tab8">标签9的内容</Tab-pane>
+        </Tabs>
+        <Button type="primary" v-on:click="handleTabsAdd" >add</Button>
+        <i-button type="primary">Primary</i-button>
     </div>
-    <script type="text/javascript">
+    <script>
         var vm = new Vue({
-            el: "#app1",
-            data: {
-                msg: "wy"
+            el: '#app',
+            data() {
+                return {
+                    t: {
+                        tab0: true,
+                        tab1: true,
+                        tab2: true,
+                        tab3: true,
+                        tab4: true,
+                        tab5: false,
+                        tab6: false,
+                        tab7: false,
+                        tab8: false,
+                        tabs: 4,
+                        ds:false
+                    },
+                }
+            },
+            methods: {
+                handleTabsAdd() {
+                    this.t.tabs++;
+                    this.t['tab' + this.t.tabs] = true;
+                    console.log(this.t);
+                },
+                handleTabRemove(name) {
+                    this.t.tabs--;
+                    this.t['tab' + name] = false;
+                    console.log(this.t);
+                }
             }
         })
     </script>
