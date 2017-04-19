@@ -1,13 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-</head>
-<body>
-	<ul id="ul">
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
 		
+		#did {
+			width: 50px;
+			margin: 200px auto;
+			position: relative;
+		}
+		
+		.sport {
+			display: block;
+			width: 20px;
+			height: 20px;
+			background: #000;
+			transition: all .4s;
+		}
+		/*.sport:first-child {
+			left: 0px;
+			top: 0px;
+		}
+		.sport:nth-of-type(1){
+			left: 0px;
+			top: 20px;
+		}*/
+		.sport:first-child {
+			margin-top: -20px;
+			background: #f00;
+			animation: fir 2s infinite;
+		}
+
+		.sport:nth-of-type(2){
+			background: #f0f;
+			animation: sec 2s infinite .5s;
+		}
+
+		.sport:nth-of-type(3){
+			background: #0f0;
+			animation: thr 2s infinite .5s;
+		}
+		@keyframes fir{
+			25%{
+				transform: translateX(20px) translateY(0px)
+			}
+			50%{
+				transform: translateX(20px) translateY(20px);
+			}
+			75%{
+				transform: translateX(0px) translateY(20px);
+			}
+			100%{
+				transform: translateX(0px) translateY(0px);
+			}
+		}
+
+		@keyframes sec{
+			25%{
+				transform: translateX(0px) translateY(-20px)
+			}
+			50%{
+				transform: translateX(20px) translateY(-20px);
+			}
+			75%{
+				transform: translateX(20px) translateY(0px);
+			}
+			100%{
+				transform: translateX(0px) translateY(0px);
+			}
+		}
+
+		@keyframes thr{
+			25%{
+				transform: translateX(0px) translateY(-20px)
+			}
+			50%{
+				transform: translateX(0px) translateY(-40px);
+			}
+			75%{
+				transform: translateX(20px) translateY(-40px);
+			}
+			100%{
+				transform: translateX(20px) translateY(-20px);
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!--<ul id="js-ul">
+
 	</ul>
+
+	<div class="root">
+		<div class="container">
+			<section class="sidebar">
+				<ul class="menu"></ul>
+			</section>
+			<section class="main">
+				<article class="post"></article>
+				<p class="copyright"></p>
+			</section>
+		</div>
+	</div>-->
+
+	<div id="did">
+		<span class="sport"></span>
+		<span class="sport"></span>
+		<span class="sport"></span>
+	</div>
 	<script type="text/javascript" src="js/demo7.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+
+			// const items = document.getElementsByClassName('sport');
+
+			// xLeft(items[1]);
+			function xLeft(el) {
+				el.style.transform = 'translate(20px)';
+			}
+
+			// yDown(items[2]);
+			function yDown(el) {
+				el.style.transform = 'translateY(20px)';
+			}
+
+			// yUp(items[0]);
+			function yUp(el) {
+				el.style.transform = 'translateY(-20px)';
+			}
+
+			document.getElementById('did').addEventListener('click', function (e) {
+				console.log(e.clientX);
+				console.log(e);
+				console.log(document.getElementById('did'));
+			})
+
+			// console.log(window.getComputedStyle(items[0],null).left);
+
+			// setInterval(function () {
+			// 	const items = document.getElementsByClassName('sport');
+			// 	// console.log(items[0].style.transform);
+			// 	// parseInt(items[1].style.transformX)
+			// 	for (let i = 0; i < 3; i++) {
+			// 		if (items[i].offsetLeft === 0 && items[i].offsetTop === 0) {
+			// 			items[i].style.transform = 'translateX(20px)';
+			// 		} else if (items[i].offsetLeft === 0 && items[i].offsetTop === 20) {
+			// 			items[i].style.transform = 'translateY(-20px)';
+			// 		} else if (items[i].offsetLeft === 0 && items[i].offsetTop === 40) {
+			// 			items[i].style.transform = 'translateY(-20px)';
+			// 		} else if (items[i].offsetLeft === 534 && items[i].offsetTop === 220) {
+			// 			items[i].style.transform = 'translateY(-20px)';
+			// 		} else if (items[i].offsetLeft === 534 && items[i].offsetTop === 240) {
+			// 			items[i].style.transform = 'translateY(-20px)';
+			// 		}
+			// 	}
+			// 	console.log(items[0].offsetLeft, items[0].offsetTop);
+			// 	console.log(items[1].offsetLeft, items[1].offsetTop);
+			// 	console.log(items[2].offsetLeft, items[2].offsetTop);
+			// }, 500);
+		}
+	</script>
 </body>
+
 </html>
