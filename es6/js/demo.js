@@ -30,4 +30,16 @@ for (var i = 0; i < 5; i++) {
     })(i);
 }
 
-console.log(new Date, i);
+// console.log(new Date, i);
+
+
+function test(){
+    debugger;
+    for(let i = 0; i< 10; i++){
+        
+    }
+    const str12 = 'sdasda';
+    console.log(str12);
+}
+
+test();
