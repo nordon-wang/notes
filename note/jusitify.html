@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>水平、垂直居中</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+        
+        .clearfix {
+            zoom: 1;
+        }
+        
+        .demo3 {
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+            width: fit-content;
+            margin: 0 auto;
+        }
+        
+        .demo3 .demo31 {
+            float: left;
+            background: #f00;
+            width: 100px;
+            height: 20px;
+        }
+        
+        .demo4 {
+            position: relative;
+            margin-top: 20px;
+            height: 20px;
+        }
+        
+        .demo4 .demo41 {
+            background: #f00;
+            width: 100px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        
+        .demo5 {
+            position: relative;
+            margin-top: 12px;
+            height: 20px;
+        }
+        
+        .demo5 .demo51 {
+            position: absolute;
+            width: 100px;
+            background: #f0f;
+            left: 50%;
+            margin-left: -50px;
+            height: 20px;
+        }
+        
+        .demo6 {
+            position: relative;
+            margin-top: 12px;
+            height: 20px;
+        }
+        
+        .demo6 .demo61 {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            background: #f0f;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+        /**/
+        
+        .jusitify1 {
+            height: 40px;
+            background: #ccc;
+        }
+        
+        .jusitify1::after,
+        .jusitify11 {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .jusitify1::after {
+            content: "";
+            height: 100%;
+        }
+        
+        .jusitify2 {
+            display: table;
+            height: 40px;
+            background: #ccc;
+        }
+        
+        .jusitify2 .jusitify21 {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        
+        .jusitify3 {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            background: #ccc;
+        }
+        
+        .jusitify4 {
+            position: relative;
+            height: 40px;
+            background: #ccc;
+        }
+        
+        .jusitify4 .jusitify41 {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <!--行内元素，给其父元素增加text-align:center-->
+    <!--块级元素，设置width:xxpx; margin:0 auto-->
+
+    <!--若子元素包含 float:left 属性, 为了让子元素水平居中, 则可让父元素宽度设置为fit-content,并且配合margin-->
+    <div class="demo3 clearfix">
+        <div class="demo31"></div>
+    </div>
+
+    <!--使用CSS3中新增的transform属性-->
+    <div class="demo4">
+        <div class="demo41"></div>
+    </div>
+
+    <!--绝对定位方式, 以及负值的margin-left-->
+    <div class="demo5">
+        <div class="demo51"></div>
+    </div>
+
+    <!--使用绝对定位方式, 以及left:0;right:0;margin:0 auto;-->
+    <div class="demo6">
+        <div class="demo61"></div>
+    </div>
+
+    <!--垂直居中-->
+
+    <!--若元素是单行文本, 则可设置 line-height 等于父元素高度-->
+    <div class="jusitify1">
+        <div class="jusitify11">
+            垂直居中111
+        </div>
+    </div>
+
+    <!-- 可用 vertical-align 属性, 而vertical-align只有在父层为 td 或者 th 时, 才会生效, 对于其他块级元素, 例如 div、p 等, 默认情况是不支持的. 为了使用vertical-align, 我们需要设置父元素display:table, 子元素 display:table-cell;vertical-align:middle;-->
+    <div class="jusitify2">
+        <div class="jusitify21">
+            垂直居中222
+        </div>
+    </div>
+
+    <!---->
+    <div class="jusitify3">
+        <div class="jusitify31">
+            垂直居中333
+        </div>
+    </div>
+
+    <!--transfrom-->
+    <div class="jusitify4">
+        <div class="jusitify41">
+            垂直居中444
+        </div>
+    </div>
+</body>
+
+</html>

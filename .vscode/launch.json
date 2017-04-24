@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "E:/g/v1/es6/js/demo7.js"
+            "program": "E:/g/v1/es6/js/class.js"
         },
         {
             "type": "node",

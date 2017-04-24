@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+	<!-- app -->
+	<div id="app1"></div>
+	<!-- app -->
+	<div id="app2"></div>
+	<!-- app -->
+	<div id="app3"></div>
+	<!-- app -->
+	<div id="app4"></div>
+	<!-- app -->
+	<div id="app5"></div>
+	<!-- app -->
+	<div id="app6"></div>
+	<!-- app -->
+	<div id="app7"></div>
+	<!-- app -->
+	<div id="app8"></div>
+	<!-- app -->
+	<div id="app9"></div>
+	<!-- app -->
+	<div id="app10"></div>
+	<script type="text/javascript">
+    
+    const NotFound = {template:'<h1>Page not find </h1>'};
+    const Home = {template:'<h1> Home Page </h1>'};
+    const About = {template:'<h1> about page </h1>'};
+
+    const routes = {
+        '/':Home,
+        '/about':About
+    }
+
+    new Vue({
+        el:"#app1",
+        data:{
+            currentRoute : window.location.pathname
+        },
+        computed:{
+            ViewComponent(){
+                return routes[this.currentRoute] || NotFound
+            }
+        },
+        render (h) { return h(this.ViewComponent)}
+    });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="js/vue.min.js"></script>
+    <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        /*css过渡*/
+        
+        .fade-enter-active {
+            transition: all .3s ease;
+        }
+        
+        .fade-leave-active {
+            transition: all .5s linear;
+        }
+        
+        .fade-enter,
+        .fade-leave-active {
+            transform: translateX(20px);
+            opacity: 0;
+        }
+        /*css动画*/
+        
+        @keyframes bounce-in {
+            from {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes bounce-out {
+            from {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            to {
+                transform: scale(0);
+            }
+        }
+        
+        .bounce-enter-active {
+            animation: bounce-in 1s;
+        }
+        
+        .bounce-leave-active {
+            animation: bounce-out 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- app css过渡 -->
+    <div id="app1">
+        <button type="" v-on:click=" show = !show ">BTN</button>
+        <transition name="fade">
+            <p v-if="show">transtion</p>
+        </transition>
+    </div>
+    <!-- app css动画-->
+    <div id="app2">
+        <button v-on:click=" show = !show ">btn</button>
+        <transition name="bounce">
+            <p v-if="show"> bounce animation </p>
+        </transition>
+    </div>
+    <!-- app -->
+    <div id="app3">
+        <button v-on:click=" show = !show ">btn</button>
+        <transition name="bounce" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+            <p v-if="show"> custom animation </p>
+        </transition>
+    </div>
+    <!-- app -->
+    <div id="app4">
+        <anchored-heading :level="1">Hello world!</anchored-heading>
+    </div>
+    <!-- app -->
+    <div id="app5">
+        <render-demo :level="1">
+
+            About Me render
+        </render-demo>
+        <blog-post>
+            <h1 slot="header">
+                About Me
+            </h1>
+            <p>Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
+            <p slot="footer">
+                Copyright 2016 Evan You
+            </p>
+            <p>If I have some content down here, it will also be included in vm.$slots.default.</p>.
+        </blog-post>
+    </div>
+    <!-- app -->
+    <div id="app6">
+        <render-self>
+            <span slot="header"> render demo header</span>
+        </render-self>
+
+        <!--<input type="" v-focusall name="" value="">-->
+        <input type="text" v-focusself="2 + 3">
+        <input type="text" v-focusself>
+    </div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+
+    <script type="text/x-template" id="anchored-heading-template">
+        <div>
+            <h1 v-if="level === 1">
+                <slot></slot>
+            </h1>
+            <h2 v-if="level === 2">
+                <slot></slot>
+            </h2>
+            <h3 v-if="level === 3">
+                <slot></slot>
+            </h3>
+            <h4 v-if="level === 4">
+                <slot></slot>
+            </h4>
+            <h5 v-if="level === 5">
+                <slot></slot>
+            </h5>
+            <h6 v-if="level === 6">
+                <slot></slot>
+            </h6>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        new Vue({
+            el: "#app1",
+            data() {
+                return {
+                    show: true
+                }
+            }
+        });
+
+        new Vue({
+            el: "#app2",
+            data() {
+                return {
+                    show: true
+                }
+            }
+        });
+
+        new Vue({
+            el: "#app3",
+            data: {
+                show: true
+            }
+        })
+
+        Vue.component('anchored-heading', {
+            template: "#anchored-heading-template",
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        })
+
+        new Vue({
+            el: "#app4",
+            data: {
+            }
+        });
+
+        //render
+        Vue.component('render-demo', {
+            render: function (createElement) {
+                return createElement(
+                    'h' + this.level,
+                    this.$slots.default
+                )
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        });
+
+        // 
+        Vue.component('blog-post', {
+            render: function (createElement) {
+                var header = this.$slots.header
+                var body = this.$slots.default
+                var footer = this.$slots.footer
+                return createElement('div', [
+                    createElement('header', header),
+                    createElement('main', body),
+                    createElement('footer', footer),
+                    'addddddd dd d d d'
+                ])
+            }
+        })
+        // 
+        new Vue({
+            el: "#app5"
+        });
+
+        // 
+        Vue.component("renderSelf", {
+            render: function (createElement) {
+                return createElement('h1', {
+                    attrs: {
+                        name: "names",
+                        id: "ids"
+                    },
+                    style: {
+                        color: "#f00"
+                    }
+                }, 'self createElement')
+            }
+        });
+
+        Vue.directive('focusall', {
+            inserted: function (el) {
+                el.focus()
+            }
+        });
+        // bind -- 只调用一次，第一次绑定到元素时调用
+        // inserted -- 被绑定元素插入父节点时调用
+        // update -- 模板更新时
+        // componentUpdated --模板完成一次更新周期时调用
+        // unbind -- 只调用一次，指令与元素解绑时调用
+        new Vue({
+            el: "#app6",
+            directives: {
+                focusself: {
+                    inserted: function (el,binding,vnode) {
+                        console.log(el);
+                        console.log(binding);
+                        console.log(vnode);
+                        el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+
+
+    <script type="text/javascript">
+        window.onload = function () {
+            let arr = [111, 222, 333, 444];
+            console.log(arr.map(function (val, ind) {
+                return { num: val }
+            }))
+        }
+    </script>
+</body>
+
+</html>
