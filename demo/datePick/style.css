@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+div.ui-datepicker-con {
+  width: 240px;
+  height: 50px;
+  background: #f0f0f0; }
+  div.ui-datepicker-con div.ui-datepicker-title a.ui-datepicker-btn {
+    width: 50p;
+    height: 40px;
+    text-decoration: none; }
+  div.ui-datepicker-con div.ui-datepicker-title a.ui-datepicker-pre-btn {
+    float: left; }
+  div.ui-datepicker-con div.ui-datepicker-title a.ui-datepicker-next-btn {
+    float: right; }
+  div.ui-datepicker-con div.ui-datepicker-title span {
+    font-size: 18px;
+    font-weight: bold; }
+
+/*# sourceMappingURL=style.css.map */
