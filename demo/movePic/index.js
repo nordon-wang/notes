@@ -64,7 +64,7 @@ const Objs = function (id, time) {
         // let times = setTimeout(() => o.movePic.apply(o), this.time);
         // let times = setTimeout(() => this.movePic.apply(o), this.time);
         clearInterval(times);
-         times = setTimeout("o.movePic.apply(o)", this.time);
+        times = setTimeout("o.movePic.apply(o)", this.time);
     }
 
     getID('did').addEventListener('mouseover', function () {
