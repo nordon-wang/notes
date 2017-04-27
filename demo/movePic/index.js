@@ -5,6 +5,7 @@ const Objs = function (id, time) {
     let y = 0;
     let backX = false;
     let backY = false;
+    let times;
 
     // 公有变量
     this.id = id;
@@ -62,18 +63,19 @@ const Objs = function (id, time) {
         // let times = setTimeout(this.movePic.bind(o), this.time);
         // let times = setTimeout(() => o.movePic.apply(o), this.time);
         // let times = setTimeout(() => this.movePic.apply(o), this.time);
-        let times = setTimeout("o.movePic.apply(o)", this.time);
+        clearInterval(times);
+         times = setTimeout("o.movePic.apply(o)", this.time);
     }
+
+    getID('did').addEventListener('mouseover', function () {
+        clearInterval(times);
+    });
+
+    getID('did').addEventListener('mouseleave', function () {
+        times = setInterval("o.movePic.apply(o)", this.time);
+    });
 }
 
 const o = new Objs('did', 20);
-
 o.movePic();
 
-o.getIDs('did').addEventListener('mouseover', function () {
-    clearInterval(times);
-});
-
-o.getIDs('did').addEventListener('mouseleave', function () {
-    times = setInterval(movePic, 10);
-});
