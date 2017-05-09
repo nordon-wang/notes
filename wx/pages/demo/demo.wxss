@@ -1,0 +1,17 @@
+.class-0{
+  color: #f00;
+}
+
+.demo1{
+	display: block;
+	background-color: #f00;
+	width: 700rpx;
+	height: 200rpx;
+}
+
+.demo2{
+	display: block;
+	background-color: #f0f;
+	width: 600rpx;
+	height: 100rpx;
+}

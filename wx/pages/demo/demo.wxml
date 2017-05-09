@@ -1,0 +1,76 @@
+<view class="demo">
+ Demo pages
+</view>
+<view class="msg">
+{{msg}}
+</view>
+
+<view class="globalDatas">
+{{globalDatas}}
+</view>
+
+<button bindtap="demoTap">按钮</button>
+
+<!--列表渲染-->
+<view class="" wx:for="{{arr1}}" wx:key="">{{item}}</view>
+
+<!--条件渲染-->
+<view class="" wx:if="{{ condition === 'Wy' }}">Wy条件渲染</view>
+<view class="" wx:elif="{{ condition === 'nordon' }}">nordon条件渲染</view>
+<view class="" wx:else="{{ condition === 'bing' }}">else 条件渲染</view>
+
+<!--模板-->
+<template name="staffName">
+  <view class="">
+  FistName:{{firstName}}----LastName:{{lastName}}
+  </view>
+</template>
+
+<!--使用模板-->
+<template is="staffName" data="{{...staffA}}"></template>
+<template is="staffName" data="{{...staffB}}"></template>
+<template is="staffName" data="{{...staffC}}"></template>
+
+
+<template name="templateName">
+  <view class="">
+  item:{{items}}
+  </view>
+</template>
+
+<template is="templateName" data="{{...templateDatas}}"></template>
+
+<!--WXML的动态数据均是来自Page中的data-->
+<view class="class-{{num}}">属性需要在{{}}中</view>
+<view class="" wx:if="{{conditions}}">conditions</view>
+<view class="" wx:if="{{true}}">trueh还是需要写在{{}}中，不能直接写成字符串</view>
+
+<!--可以子啊{{}}内进行简单的运算-->
+<view class="" wx:if="{{ conditions ? true : false}}">三元运算2</view>
+<view class="" wx:if="{{ conditions ? false : true}}">三元运算1</view>
+
+<view class="">{{(num + 3) * 3}} + 2</view>
+
+<view class="" wx:for="{{[num,1,2]}}" wx:key="">{{item}}</view>
+
+	<template name="objectCombine">
+	<view class=""> item1:{{item1}} --- item1:{{item2}} --- item3:{{item3}}</view>
+	</template>
+
+	<template is="objectCombine" data="{{item1:num,item2:conditions}}"></template>
+	<template is="objectCombine" data="{{...obj1,...obj2,item3:'nordon'}}"></template>
+	<!--arr-->
+	<view class="" wx:for="{{arr1}}" wx:key="">{{item}}</view>
+	
+	<!--obj-->
+	<view class="" wx:for="{{objs}}" wx:key="">{{index}} --- {{item.msg}}</view>
+
+	<view class="" wx:for="{{objs}}" wx:key="" wx:for-index="i" wx:for-item="it">{{i}}---{{it.msg}}</view>
+
+	<block wx:for="{{[1,2,3]}}">
+		<view>{{index}}</view>
+		<view>{{item}}</view>
+	</block>
+	<view class="demo1" style="background:{{color1}}"></view>
+	<view class="demo2" style="background:{{color2}}"></view>
+	<view class="demo3" style="height:200rpx; background:#ff0;"></view>
