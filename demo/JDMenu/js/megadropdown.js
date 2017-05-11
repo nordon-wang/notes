@@ -120,5 +120,18 @@ $(document).ready(function(){
 			
 			
 		})
+
+
+		// $('#btn').on('click',function(){
+		// 	console.log(1111111)
+		// })
+
+		// $(document).on('click','#btn',function(){
+		// 	console.log(11111111111)
+		// })
+
+		document.getElementById('btn').addEventListener('click',function(e){
+			console.log(e.button)
+		})
 		
 })
