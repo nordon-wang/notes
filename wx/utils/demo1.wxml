@@ -1,0 +1,5 @@
+<template name="temDemo1">
+	<view class="">
+	  name111:{{msg}}
+	</view>
+</template>
