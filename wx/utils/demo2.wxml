@@ -1,0 +1,8 @@
+<template name="temDemo2">
+	<view class="">
+	  name222:{{msg}}
+	</view>
+</template>
+<template name="item">
+  <text>text--{{text}}</text>
+</template>

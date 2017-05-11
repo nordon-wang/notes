@@ -1,7 +1,63 @@
-<view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
+<!--<view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="i">
   <view wx:for="{{[1, 2, 3, 4, 5, 6, 7, 8, 9]}}" wx:for-item="j">
     <view wx:if="{{i <= j}}">
       {{i}} * {{j}} = {{i * j}}
     </view>
   </view>
+</view>-->
+
+<video src="http://www.imibi.cn/wangyao/demo.mp4"></video>
+
+<navigator url="../page1/page1">跳转页面</navigator>
+
+<icon type="success" size="24"/>
+
+<progress percent="20" show-info color="#f00"/>
+<progress percent="40" stroke-width="18" />
+<progress percent="60" color="#f0f" />
+<progress percent="80" active />
+
+<button bindtap="tapBtn">tapBtn</button>
+
+<!--事件是视图层到逻辑层的通讯方式-->
+<!--事件可以将用户的行为反馈到逻辑层处理-->
+
+<view class="demo1" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" bindtap="clicks"></view>
+
+<!--bind绑定事件不会阻止冒泡事件向上冒泡，catch绑定时间会阻止冒泡事件向上冒泡-->
+<view class="" bindtap="handler1">
+outer handler1
+	<view class="" catchtap="handler2">
+	阻止冒泡
+	  <view class="" bindtap="handler3">
+			不阻止冒泡
+		</view> 
+	</view>
 </view>
+
+<view data-alpha-beta="1" data-alphaBeta="2" bindtap="bindViewTap"> DataSet Test </view>
+
+<import src="../../utils/demo1.wxml"/>
+<template is="temDemo1" data="{{...temDemo1}}"></template>
+
+<import src="../../utils/demo2.wxml" />
+<template is="temDemo2" data="{{msg:'objssss'}}"></template>
+<template is="item" data="{{text: 'forbar'}}"/>
+
+<include src="../../utils/header.wxml" />
+
+<include src="../../utils/footer.wxml" />
+
+<view  wx:for="{{datas}}" wx:key="">
+<!--<image style=" background-color: #eeeeee;" mode="{{item.mode}}" src="{{item.url}}"></image>-->
+</view>
+
+<view class="view-default" hover-class="view-tap" hover-start-time="1000" hover-stay-time="1000"></view>
+
+<button loading="{{true}}" type="default" class="btn-default" hover-class="button-hover" hover-start-time="1000" hover-stay-time="2000"> dialog</button>
+<button loading="{{false}}" type="warn" > dialog</button>
+<button plain="{{false}}" type="primary" > dialog</button>
+<button plain="{{true}}" type="primary" size="default" > dialog</button>
+<button  open-type="contact" type="primary" size="mini" > dialog</button>
+
+
