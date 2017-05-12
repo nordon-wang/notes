@@ -10,6 +10,8 @@
 
 <navigator url="../page1/page1">跳转页面</navigator>
 
+<navigator url="../maps/maps">地图</navigator>
+
 <icon type="success" size="24"/>
 
 <progress percent="20" show-info color="#f00"/>

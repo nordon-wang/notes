@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "动画页面",
+  "navigationBarBackgroundColor": "#333",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "disableScroll": false
+}

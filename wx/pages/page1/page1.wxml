@@ -1,2 +1,78 @@
 <!--page1.wxml-->
-<text>page1.wxml</text>
+<view class="search-simple"></view>
+
+<!--来源-->
+<view class="search-header">
+  <view class="search-header-top">
+    <text>来源</text>
+  </view>
+  <view class="search-header-btm clearfix">
+    <view class="search-header-btm-l left">
+      <image class="left" src="../../img/search-header1.png"></image>
+      <navigator class="left" url="#">留言</navigator>
+      <image class="left duiHao" src="../../img/search-header-dui.png"></image>
+    </view>
+    <view class="search-header-btm-c left">
+      <image class="left" src="../../img/search-header2.png"></image>
+      <navigator class="left" url="#">TT</navigator>
+      <image class="left duiHao" src="../../img/search-header-dui.png"></image>
+    </view>
+    <view class="search-header-btm-r left">
+      <image class="left" src="../../img/search-header3.png"></image>
+      <navigator class="left" url="#">其他</navigator>
+      <image class="left duiHao" src="../../img/search-header-dui.png"></image>
+    </view>
+  </view>
+</view>
+
+<view class="search-simple"></view>
+
+<!--客户类型-->
+<view class="search-customer-type">
+  <view class="search-customer-type-top">
+    <text>客户类型</text>
+  </view>
+  <view class="search-customer-type-btm">
+    <text class="search-customer-type-btm-text">潜在客户</text>
+    <text class="search-customer-type-btm-text">目标客户</text>
+    <text class="search-customer-type-btm-text">成交客户</text>
+    <text class="search-customer-type-btm-text">意向客户</text>
+  </view>
+</view>
+
+<view class="search-simple"></view>
+
+
+<!--入录时间-->
+<view class="search-enroll-type">
+  <view class="search-enroll-type-top">
+    <text>入录时间</text>
+  </view>
+  <view class="search-enroll-type-btm">
+    <text class="search-enroll-type-btm-text">搜索开始时间</text>
+    <text class="search-enroll-type-btm-text">搜索结束时间</text>
+  </view>
+</view>
+
+<view class="search-simple"></view>
+
+<!--是否为重点客户-->
+<view class="search-key-custom">
+  <view class="search-key-custom-top">
+    <text>是否为重点客户</text>
+  </view>
+  <view class="search-key-custom-btm clearfix">
+    <image class="left" src="../../img/search-key-dui.png"></image>
+    <text class="left">重点客户搜索</text>
+  </view>
+  <view class="search-key-custom-btm">
+    <image class="left" src="../../img/search-key-dui.png"></image>
+    <text class="left">非重点客户搜索</text>
+  </view>
+</view>
+
+<view class="search-simple"></view>
+
+<view class="search-btn">
+ <button type="primary">确定</button>
+</view>

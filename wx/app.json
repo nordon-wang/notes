@@ -1,9 +1,11 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/text1/text1",
     "pages/demo/demo",
-    "pages/index/index",
     "pages/page1/page1",
+    "pages/maps/maps",
+    "pages/animate/animate",
     "pages/logs/logs"
   ],
   "window":{
@@ -20,14 +22,8 @@
       "pagePath": "pages/index/index",
       "text": "首页"
     },{
-      "pagePath":"pages/logs/logs",
-      "text":"日志"
-    },{
-      "pagePath":"pages/demo/demo",
-      "text":"测试"
-    },{
 			"pagePath":"pages/text1/text1",
-			"text":"测试2"
+			"text":"测试1"
 		}]
   }
    
