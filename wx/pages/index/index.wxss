@@ -19,3 +19,20 @@
 .usermotto {
   margin-top: 200px;
 }
+
+navigator{
+  padding-left: 20rpx;
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #f0f;
+}
+.nav-hover{
+  background-color: #000;
+  color: #fff;
+}
+
+.nav-hover-start{
+  background-color: #333;
+  color: #e5e5e5;
+}

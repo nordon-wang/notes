@@ -1,3 +1,9 @@
 <!--index.wxml-->
 
-<navigator url="../animate/animate">动画页面</navigator>
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../animate/animate">动画页面</navigator>
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../page1/page1">T云页面</navigator>
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../maps/maps">地图页面</navigator>
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../demo/demo">demo页面</navigator>
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../logs/logs">logs</navigator>
+
+<navigator hover-class="nav-hover" hover-start-time="50" hover-stay-time="100" url="../form/form">form</navigator>

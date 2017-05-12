@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "高级搜索",
   "navigationBarBackgroundColor": "rgb(52,146,233)",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "disableScroll": false
 }
