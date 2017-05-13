@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css变量</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*
+        变量声明
+            --是变量名前缀 sass前缀是$ less前缀是@ 
+            --为了区别，css前缀是 --
+    */
+
+        body {
+            --main-color: #f00;
+            --main-font-size: 40px;
+            --main-bg: #333;
+            --content: 'css string contact';
+        }
+
+        span {
+            --span-color: #f0f;
+        }
+
+        div {
+            --div-color: #0f0;
+
+            /*var() 也可以用作变量的声明*/
+            --line-through: line-through;
+            --text-decoration: var(--line-through);
+        }
+        /*  
+        var() 变量使用
+            --css在使用声明的变量，需要使用var()函数进行解析
+            --若是只使用一个参数 ·· 参数伟变量，若变量不存在则没有效果
+            --var(var,default-var)
+                --- 第一个变量为声明的变量，若没有声明则无效果
+                --- 第二个参数是表示变量的默认值，当第一个参数的变量不存在时使用默认是
+                    ---- var(item1,items2,items3...) 传入多个参数，只会将第一个参数items1当做变量进行解析，剩余的参数全部当做第一个参数变量的默认值处理
+                    ---- var(items1, items2 items3 ...) 传入两个参数，第二个参数使用空格隔开，也只是将其整体作为默认值处理
+            -- var() 也可以用作变量的声明
+    */
+
+        #did p {
+            color: var(--main-color);
+            font-size: var(--main-font-size);
+            background-color: var(--main-bg);
+            /*span-color 在此没有效果*/
+            /*color: var(--span-color);*/
+            /*div-color 有效果*/
+            /*color: var(--div-color);*/
+            /*var(item1,items2,items3...)*/
+            border: var(--div-border, 1px, solid, #f00);
+
+            /*var(items1, items2 items3 ...)*/
+            padding: var(--div-padding, 10px 20px 30px);
+
+            /*var() 也可以用作变量的声明*/
+            text-decoration: var(--text-decoration);
+        }
+
+        span {
+            color: var(--span-color);
+        }
+        /*如果变量值是一个字符串，可以与其他字符串进行拼接*/
+
+        span::after {
+            content: 'css var ' var(--content);
+        }
+        /*检测是否支持*/
+        /*h1 {
+            --h1-color: #f00;
+            color: #f0f;
+            color: var(--h1-color);
+        }*/
+
+        h1 {
+            color: #f0f;
+        }
+
+        @supports ( (--a: 0)) {
+            h1 {
+                --h1-color: #f00;
+                color: var(--h1-color);
+            }
+        }
+
+        @supports ( not (--a: 0)) {
+            h1 {
+                color: #f0f;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="did">
+        <p>css变量练习</p>
+        <span>span变量</span>
+    </div>
+    <h1>检测是否支持css变量</h1>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex骰子布局</title>
+    <style type="text/css">
+    *{margin: 0; padding: 0;}
+
+    .dice{
+        width: 200px; height: 200px; border: 1px saddlebrown solid; margin: 20px; float: left; display: flex;
+    }
+    
+    .num{
+        display: block; width: 20px; height: 20px; background-color: #000; border-radius: 10px; margin: 20px;
+    }
+
+    /*1*/
+    .dice1{
+        justify-content: center; align-items: center;
+    }
+
+    /*2*/
+    .dice2{
+        flex-direction: row; justify-content: space-between;
+    }
+
+    .num2:nth-of-type(1){
+        background-color: #f0f; 
+    }
+
+    .num2:nth-of-type(2){
+        background-color: #f00; align-self: flex-end;
+    }
+
+    /*3*/
+
+    .dice3{
+        justify-content: space-between;
+    }
+
+    .num3:nth-child(2){
+        background-color: #f9f; align-self: center;
+    }
+
+    .num3:nth-child(3){
+        align-self: flex-end;
+    }
+
+    /*4*/
+    .dice4{
+        flex-direction: row; justify-content: space-between; flex-wrap: wrap;
+    }
+
+    .num4{
+        flex-shrink: 0; width: 30px; height: 30px; border-radius: 15px;
+    }
+
+    .num4:nth-of-type(3), .num4:nth-of-type(4){
+        align-self: flex-end;
+    }
+    </style>
+</head>
+<body>
+    <!--1-->
+    <div class="dice1 dice">
+        <span class="num1 num"></span>
+    </div>
+
+    <!--2-->
+    <div class="dice2 dice">
+        <span class="num2 num"></span>
+        <span class="num2 num"></span>
+    </div>
+
+    <!--3-->
+    <div class="dice3 dice">
+        <span class="num3 num"></span>
+        <span class="num3 num"></span>
+        <span class="num3 num"></span>
+    </div>
+
+    <!--4-->
+    <div class="dice4 dice">
+        <span class="num4 num"></span>
+        <span class="num4 num"></span>
+        <span class="num4 num"></span>
+        <span class="num4 num"></span>
+    </div>
+</body>
+</html>

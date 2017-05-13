@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+</head>
+
+<body>
+    <i class="em em-baby"></i>
+    <i class="em em---1"></i>
+    <i class="em em--1"></i>
+    <i class="em em-ab"></i>
+    <i class="em em-abc"></i>
+    <i class="em em-accept"></i>
+    <i class="em em-alien"></i>
+    <div id="eg">
+
+    </div>
+    <script type="text/javascript">
+        // http://www.ruanyifeng.com/blog/2017/04/memory-leak.html 参考资料
+
+        // 不再用到的内存，没有及时释放--内存泄露
+        //     --有些语言需要手动进行内存释放 c等
+        //     --大多数语言伟了减轻程序员负担，提供自动内存管理--垃圾回收机制 java等
+
+        // 垃圾回收机制会及时回收没有任何引用的资源--当其引用数为0时，垃圾回收机制进行回收
+        //     --若一个值不再需要，但是其引用数却不为0，此时垃圾回收机制就无法释放回收其所占用的内存--从而导致内存泄露
+
+
+        // 定义一个数组，在第一次输出之后，将其所占的内存释放，若是不手动释放内存，其会一直存在内存中，从而导致内存泄露
+        let arr = [1, 2, 3];
+
+        console.log(arr);
+        // 将值设为null 就是释放内存操作
+        // arr = null;
+        // console.log(arr);
+
+        // 内存泄露识别方法
+
+        // 经验法则是，如果连续五次垃圾回收之后，内存占用一次比一次大，就有内存泄漏。这就要求实时查看内存占用。
+
+        // WeakSet WeakMap 弱引用，其对于值的引用都是不计入垃圾回收机制
+        const wm = new WeakMap();
+
+        const ele = document.getElementById('eg');
+
+        wm.set(ele, 'some information');
+        console.log(wm.get(ele));// "some information"
+        console.log(wm);
+        console.log(ele);
+    </script>
+</body>
+
+</html>
