@@ -1,0 +1,49 @@
+www.npmjs.com 查看插件
+
+html-webpack-plugin 插件
+    -- 在output中，若是entry指定多个路径，又不想生成为一个文件，会使用[name],[hash],[chunkhash]作为文件名的名称
+        module.exports = {
+            entry:{
+                main:'src/main.js',
+                plugin:['plugin/a.js','plugin/b.js']
+            },
+            output:{
+                filename:'[name]-[chunkhash].js' //chunkhash会在文件改变时发生变化，文件不修改不会改变其chunkhash
+                path:__dirname + 'bundle'
+            }
+        }
+        此时生成的文件将会随时改变，由于会引用其路径和文件名，所以使用html-webpack-plugin插件 进行 文件名实时的引用
+    -- 用法
+        const htmlWebpackPlugin = require('html-webpack-plugin);
+        module.exports = {
+            plugins: [
+                new htmlWebpackPlugin({
+                    filename:'index-[hash].html', //文件名称
+                    inject:'head || body', //文件放在head 或者body 标签中
+                    template:'index.html', //根目录下的index.html
+                    title:'通过配置传递的参数', //可以直接在hyml页面去这个参数， 使用<%= htmlWebpackPlugin.options.title %> 就可以将title的值传递至html页面
+                                            //eg ··· <title> <%= htmlWebpackPlugin.options.title %> </title>
+                    date: new Date(), //也可通过 <%= htmlWebpackPlugin.options.date %>拿到
+                    minify:{ //对生成的html文件进行压缩
+                        removeComments:true, //删除注释
+                        collapseWhitespace:true, //删除空格
+                    }
+                })
+            ]
+        }
+
+        --- 扩展 为了在index.html页面看到 htmlWebpackPlugin 的所有信息， 对其进行遍历, 写在index.html页面, 这样做可以很好的控制html文件中内容
+            <% for(let key in htmlWebpackPlugin.files ) { %>
+                <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.files[key]) %>
+            <% } %>
+            <% for(let key in htmlWebpackPlugin.options ) { %>
+                <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.options[key]) %>
+            <% } %>
+            ···· 怎样更好的控制html的内容？ eg：将生成的js代码一部分放在head中，一部分放在body中 -- 需要将 inject 改为 inject:false
+            <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>" ></script> --写在head中
+            <script src="<%= htmlWebpackPlugin.files.chunks.main.plugin %>" ></script> --写在body中
+        ---若是项目上线时，需要将引用地址修改，使用output中publicpath属性进行配置
+            ···· output:{
+                publicpath:'http://www.71360.com/' //那么文件的引用都会以此为绝对路径进行引用
+            }
+
