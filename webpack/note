@@ -47,3 +47,27 @@ html-webpack-plugin 插件
                 publicpath:'http://www.71360.com/' //那么文件的引用都会以此为绝对路径进行引用
             }
 
+-loader
+
+module.ecports = {
+    entry:'',
+    output:{
+        filename:[name].js,
+        path:__dirname
+    },
+    module:{
+        loader:[
+            {
+                test:/\.css$/,
+                loader:'babel', //使用之前需要安装引用 --npm安装  baerl是babel-loader简写
+                query:{ //配合babel使用的一个参数 也可以通过参数传入 
+                    presets:['latest']//指定编译的版本 latest表示全部版本 也可以 presets:['es2015','es2016'] 指定编译的具体版本
+                    //presets的使用 
+                        // -- 可以建立一个 .babellrc 文件 里面填写  {presets:['es2015]}
+                        // -- 也可以在package.json文件中直接配置
+                            // --- babel:{presets:['es2015]}
+                }
+            }
+        ]
+    }
+}
