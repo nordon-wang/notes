@@ -1,0 +1,11 @@
+搭建环境
+    工具：
+        Node 
+        React Native Command Line  -- npm i -g react-native-cli
+        Android Studio / XCode
+        JDK
+    开始
+        react-native init
+            -- 速度慢 在node目录下 找到npmrc文件 添加淘宝镜像
+                --- registry=https://registry.npm.taobao.org
+        模拟器 genymotion
