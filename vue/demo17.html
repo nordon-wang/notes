@@ -9,8 +9,9 @@
 	<!-- app -->
 	<div id="app1">
         <p>{{msg}}</p>
-        <component v-bind:is="currentView"></component>
-        <component v-bind:is="homes"></component>
+        <my-com></my-com>
+        <child-com></child-com>
+        <Child></Child>
     </div>
 	<!-- app -->
 	<div id="app2"></div>
@@ -31,27 +32,23 @@
 	<!-- app -->
 	<div id="app10"></div>
 	<script type="text/javascript">
+    Vue.component('my-com',{
+        template:'<h1>全局组件</h1>'
+    });
 
-    const Homes = {
-        template : "<h1> Homes </h1>"
+    let Child = {
+        template:'<h2>局部组件child</h2>'
     }
-
     new Vue({
         el:"#app1",
         data (){
             return {
-                msg:'ms',
-                currentView:'posts',
-                homes: Homes
+                msg:'全局data msg'
             }
         },
         components:{
-            home:{
-                template:'<h1> Home </h1>'
-            },
-            posts:{
-                template:'<h1> posts </h1>'
-            }
+            'child-com':Child,
+            Child:Child
         }
     })
     </script>
