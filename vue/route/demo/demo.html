@@ -1,0 +1,30 @@
+<script src="../vue.js"></script>
+<script src="../router.js"></script>
+
+<div id="app">
+  <p>
+	<router-link to="/user/foo">foo</router-link>
+	<router-link to="/user/bar">bar</router-link>
+	<router-view></router-view>
+  </p>
+</div>
+
+
+<script type="text/javascript">
+
+const User = {template:`<div> userss {{ $route.params.username }} </div>`};
+
+const router = new VueRouter({
+	routes:[
+	{path:'/user/:username',component:User}]
+})
+
+const app = new Vue({
+	router
+}).$mount("#app")
+
+
+/**
+ * user/foo -- user/bar 映射到相同的router
+ */
+</script>

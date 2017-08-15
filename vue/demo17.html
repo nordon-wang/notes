@@ -1,56 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>组件</title>
+    <meta charset="UTF-8">
+    <title>组件</title>
     <script src="js/vue.min.js"></script>
 </head>
+
 <body>
-	<!-- app -->
-	<div id="app1">
+    <!-- app -->
+    <div id="app1">
         <p>{{msg}}</p>
         <my-com></my-com>
         <child-com></child-com>
         <Child></Child>
     </div>
-	<!-- app -->
-	<div id="app2"></div>
-	<!-- app -->
-	<div id="app3"></div>
-	<!-- app -->
-	<div id="app4"></div>
-	<!-- app -->
-	<div id="app5"></div>
-	<!-- app -->
-	<div id="app6"></div>
-	<!-- app -->
-	<div id="app7"></div>
-	<!-- app -->
-	<div id="app8"></div>
-	<!-- app -->
-	<div id="app9"></div>
-	<!-- app -->
-	<div id="app10"></div>
-	<script type="text/javascript">
-    Vue.component('my-com',{
-        template:'<h1>全局组件</h1>'
+    <!-- app -->
+    <div id="app2">
+        <anchored-heading :level="3" :msg="'sss'">Hello world3!</anchored-heading>
+        <my-props :msg="'msg required'"></my-props>
+        <my-yi :msg="'sd'"></my-yi>
+        <my-slot>
+            <h1 slot="header">header slot</h1>
+            
+            <p>default slot11</p>
+            
+            <b slot="footer"> footer slot</b>
+
+            <p>default slot22</p>
+
+            <p>default slot33</p>
+        </my-slot>
+    </div>
+    <!-- app -->
+    <div id="app3"></div>
+    <!-- app -->
+    <div id="app4"></div>
+    <!-- app -->
+    <div id="app5"></div>
+    <!-- app -->
+    <div id="app6"></div>
+    <!-- app -->
+    <div id="app7"></div>
+    <!-- app -->
+    <div id="app8"></div>
+    <!-- app -->
+    <div id="app9"></div>
+    <!-- app -->
+    <div id="app10"></div>
+    <script type="text/javascript">
+
+    Vue.component('my-slot',{
+        render:function(createElement){
+            let header = this.$slots.header, body = this.$slots.default, footer = this.$slots.footer;
+            return createElement('div',[
+                createElement('header',header),
+                createElement('main',body),
+                createElement('footer',footer)
+            ])
+        }
+    })
+    
+    Vue.component('my-yi',{
+        render (createElement){
+            return createElement('div',{
+                attrs:{
+                    class:"wang",
+                    msg:'wa'
+                }
+            },[
+                'sds',
+                createElement('h2','demo h2 ')
+            ])
+        },
+        props:['msg'],
+        template:`<div> {{msg}}</div>`
+    })
+
+
+    Vue.component('my-props', {
+        props: {
+            msg: {
+                required: true
+            }
+        },
+        template: `<div :class="msg"> {{msg}} </div>`
+    })
+
+    // 
+    var getChildrenTextContent = function(children) {
+        console.log(children);
+        return children.map(function(node) {
+            console.log(node);
+            console.log(node.children);
+            return node.children ?
+                getChildrenTextContent(node.children) :
+                node.text
+        }).join('')
+    }
+    Vue.component('anchored-heading', {
+        render: function(createElement) {
+            // create kebabCase id
+            var headingId = getChildrenTextContent(this.$slots.default)
+                .toLowerCase()
+                .replace(/\W+/g, '-')
+                .replace(/(^\-|\-$)/g, '')
+            return createElement(
+                'h' + this.level, [
+                    createElement('a', {
+                        attrs: {
+                            name: headingId,
+                            href: '#' + headingId
+                        }
+                    }, this.$slots.default)
+                ]
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app2"
+    })
+
+
+    Vue.component('my-com', {
+        template: '<h1>全局组件</h1>'
     });
 
     let Child = {
-        template:'<h2>局部组件child</h2>'
+        template: '<h2>局部组件child</h2>'
     }
     new Vue({
-        el:"#app1",
-        data (){
+        el: "#app1",
+        data() {
             return {
-                msg:'全局data msg'
+                msg: '全局data msg'
             }
         },
-        components:{
-            'child-com':Child,
-            Child:Child
+        components: {
+            'child-com': Child,
+            Child: Child
         }
     })
     </script>
 </body>
+
 </html>

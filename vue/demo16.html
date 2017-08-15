@@ -14,9 +14,9 @@
         <my-com message="hello bing"></my-com>
         <h1>{{msg}}</h1>
         <my-com-child></my-com-child>
-        <input type="" v-model="parentMsg" name="" value=""> <br>
+        <input type="" v-model="parentMsg" name="" value="">
+        <br>
         <parent-msg :msg="parentMsg"></parent-msg>
-
         <my-com message="1"></my-com>
         <my-com :message="1"></my-com>
     </div>
@@ -31,7 +31,6 @@
         <simple-counter></simple-counter>
         <simple-counter></simple-counter>
         <p style="border:1px solid #f00;"></p>
-
     </div>
     <!-- app -->
     <div id="app4">
@@ -73,8 +72,8 @@
     <!-- app -->
     <div id="app10"></div>
     <script type="text/javascript">
-        Vue.component('app-layout', {
-            template: `<div class="container">
+    Vue.component('app-layout', {
+        template: `<div class="container">
   <header>
     <slot name="header"></slot>
   </header>
@@ -85,167 +84,167 @@
     <slot name="footer"></slot>
   </footer>
 </div>`
-        })
+    })
 
-        new Vue({
-            el: "#app7"
-        })
-
-
+    new Vue({
+        el: "#app7"
+    })
 
 
 
 
 
 
-        Vue.component('childs', {
-            template: `<div>
+
+
+    Vue.component('childs', {
+        template: `<div>
   <h2>我是子组件的标题childs</h2>`
-        });
-        Vue.component('fathers', {
-            template: `<div>
+    });
+    Vue.component('fathers', {
+        template: `<div>
   <h2>我是子组件的标题</h2>
   <slot>
     只有在没有要分发的内容时才会显示。
   </slot>
 </div>`
-        });
+    });
 
-        new Vue({
-            el: "#app6",
-            components: 'childs'
-        })
+    new Vue({
+        el: "#app6",
+        components: 'childs'
+    })
 
-        /**
-         * 非父子组件通信
-         *  -有时两个组件也需要通信，又非父子组件
-         *  --简单场景-使用一个空的Vue实例作为中央事件总线
-        */
-        let bus = new Vue();
+    /**
+     * 非父子组件通信
+     *  -有时两个组件也需要通信，又非父子组件
+     *  --简单场景-使用一个空的Vue实例作为中央事件总线
+     */
+    let bus = new Vue();
 
-        bus.$emit('id-sel', 1);
+    bus.$emit('id-sel', 1);
 
-        bus.$on('id-sel', function (id) {
-            console.log(id);
-        });
+    bus.$on('id-sel', function(id) {
+        console.log(id);
+    });
 
 
-        Vue.component('on-emit', {
-            template: '<button v-on:click="childclick"> {{ childNum }} </button>',
-            data() {
-                return {
-                    childNum: 0
-                };
-            },
-            methods: {
-                childclick() {
-                    this.childNum += 1;
-                    this.$emit('childclick');
-                }
+    Vue.component('on-emit', {
+        template: '<button v-on:click="childclick"> {{ childNum }} </button>',
+        data() {
+            return {
+                childNum: 0
+            };
+        },
+        methods: {
+            childclick() {
+                this.childNum += 1;
+                this.$emit('childclick');
             }
-        });
+        }
+    });
 
-        new Vue({
-            el: "#app5",
-            data: {
-                fatherNum: 0
-            },
-            methods: {
-                fatherclick() {
-                    this.fatherNum += 1;
-                }
+    new Vue({
+        el: "#app5",
+        data: {
+            fatherNum: 0
+        },
+        methods: {
+            fatherclick() {
+                this.fatherNum += 1;
             }
-        })
+        }
+    })
 
 
 
-        Vue.component('example', {
-            props: {
-                propA: {
-                    validaor: function (value) {
-                        return value > 10;
-                    }
-                },
-                propAc: {
-                    type: Number,
-                    default: 100
+    Vue.component('example', {
+        props: {
+            propA: {
+                validaor: function(value) {
+                    return value > 10;
                 }
             },
-            template: '<p>SAD {{propA}}</p>'
-        })
-
-        new Vue({
-            el: "#app4",
-            data() {
-                return {
-                    msg: 'app4',
-                    sd: '2'
-                };
+            propAc: {
+                type: Number,
+                default: 100
             }
+        },
+        template: '<p>SAD {{propA}}</p>'
+    })
 
-        })
-
-
-
-        Vue.component('my-com', {
-            props: ['message'],
-            data() {
-                return {
-                    num: this.message
-                }
-            },
-            template: '<div>componnets parent  {{ num + 2 }}</div>'
-        });
-
-        Vue.component('parent-msg', {
-            props: ['msg'],
-            data() {
-                return {
-                    msgs: this.msg
-                }
-            },
-            template: "<b> {{msg}}</b>"
-        })
-
-        var Child = {
-            template: '<h1>Child component</h1>'
+    new Vue({
+        el: "#app4",
+        data() {
+            return {
+                msg: 'app4',
+                sd: '2'
+            };
         }
 
-        new Vue({
-            el: "#app1",
-            data() {
-                return {
-                    msg: 'wy',
-                    parentMsg: "parentMsg"
-                }
-            },
-            components: {
-                'my-com-child': Child
-            }
-        });
+    })
 
-        new Vue({
-            el: "#app2",
-            data() {
-                return {
-                    msg2: 'nordon'
-                }
-            }
-        });
 
-        var data = { counter: 0 }
-        Vue.component('simple-counter', {
-            template: '<button v-on:click="counter += 1">{{ counter }}</button>',
-            data: function () {
-                return {
-                    counter: 0
-                }
-            }
-        })
 
-        new Vue({
-            el: "#app3"
-        })
+    Vue.component('my-com', {
+        props: ['message'],
+        data() {
+            return {
+                num: this.message
+            }
+        },
+        template: '<div>componnets parent  {{ num + 2 }}</div>'
+    });
+
+    Vue.component('parent-msg', {
+        props: ['msg'],
+        data() {
+            return {
+                msgs: this.msg
+            }
+        },
+        template: "<b> {{msg}}</b>"
+    })
+
+    var Child = {
+        template: '<h1>Child component</h1>'
+    }
+
+    new Vue({
+        el: "#app1",
+        data() {
+            return {
+                msg: 'wy',
+                parentMsg: "parentMsg"
+            }
+        },
+        components: {
+            'my-com-child': Child
+        }
+    });
+
+    new Vue({
+        el: "#app2",
+        data() {
+            return {
+                msg2: 'nordon'
+            }
+        }
+    });
+
+    var data = { counter: 0 }
+    Vue.component('simple-counter', {
+        template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+        data: function() {
+            return {
+                counter: 0
+            }
+        }
+    })
+
+    new Vue({
+        el: "#app3"
+    })
     </script>
 </body>
 

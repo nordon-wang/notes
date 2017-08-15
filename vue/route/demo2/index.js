@@ -30,6 +30,7 @@ const router = new VueRouter({
     routes:[
         {path:'/user/:id',
         component:User,
+        
     children:[
         {
             path:'',

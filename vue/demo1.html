@@ -10,97 +10,154 @@
 
 <body>
 
-<!-- 尽可能简单的API实现响应的数据绑定和组合的视图组件 -->
-    <div id="app">{{message}}</div>
+    <!-- 尽可能简单的API实现响应的数据绑定和组合的视图组件 -->
+    <div id="app1">
+        <input type="text" v-model="acProps" name="" value="">
+        <div :class="{ac:isAc}">
+            {{msg}}
+        </div>
+        <div :class="[activeClass]">
+            sd
+        </div>
+        <my-com class="class3 class4" message="nordonm1"></my-com>
+        <my-com class="class3 class4" :message="acProps"></my-com>
+
+        <my-child> </my-child>
+    </div>
+
+    <!--app2-->
     <div id="app2">
-        <span v-bind:title='message'>
-			Hover your mouse over me for a few seconds to see my dynamically bound title!
-		</span>
+        <h3>{{ total }}</h3>
+        <button-count v-on:increment="incrementTotal" msg="btn1"></button-count>
+        <button-count v-on:increment="incrementTotal" msg="btn2"></button-count>
+        <input type="text" v-bind:value="mod" v-on:input="datas">
+        <b>{{mod}}</b>
+        <br>
+        <currency-input v-model="price"></currency-input>
+        <br>
+        <div>
+            <h1>我是父组件的标题</h1>
+            <my-slot>
+                <p>这是一些初始内容</p>
+                <p>这是更多的初始内容</p>
+            </my-slot>
+        </div>
     </div>
+
+    <!--app3-->
     <div id="app3">
-        <p v-if='see'>now you can sees</p>
-    </div>
-    <div id="app4">
-		<ol>
-			<li v-for='td in todos'>
-			{{td.text}}
-			</li>
-		</ol>
-    </div>
 
-	<div id="app5">
-		<p>{{message}}</p>
-        <button v-on:click='reverseMage'>reverse</button>
-	</div>
-
-    <div id="app6">
-        <input type="text" v-on:change='changeInput' name="" class="input1" v-bind:value="message">
-        <p>{{modelDemo}}</p>
-        <input type="text" v-model='modelDemo' name="">
     </div>
 
     <!-- script -->
     <script type="text/javascript">
-    var app6 = new Vue({
-        el:"#app6",
-        data:{
-            message:'input text',
-            modelDemo:'hello nordon'
-        },
-        methods:{
-            changeInput (){
-                console.log('test');
+        // app3
+        Vue.component('my-slot',{
+            template:`<div>
+            <h2>我是子组件的标题</h2>
+            <slot>
+                只有在没有要分发的内容时才会显示。
+            </slot>
+            </div>`
+        })
+
+        
+
+        // 
+        Vue.component('currency-input', {
+            template: '\
+                <span>\
+                $\
+                <input\
+                    ref="input"\
+                    v-bind:value="value"\
+                    v-on:input="updateValue($event.target.value)"\
+                >\
+                </span>\
+            ',
+            props: ['value'],
+            methods: {
+                // 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
+                updateValue: function (value) {
+                    var formattedValue = value
+                        // 删除两侧的空格符
+                        .trim()
+                        // 保留 2 小数位
+                        .slice(
+                        0,
+                        value.indexOf('.') === -1
+                            ? value.length
+                            : value.indexOf('.') + 3
+                        )
+                    // 如果值不统一，手动覆盖以保持一致
+                    if (formattedValue !== value) {
+                        this.$refs.input.value = formattedValue
+                    }
+                    // 通过 input 事件发出数值
+                    this.$emit('input', Number(formattedValue))
+                }
             }
-        }
-    });
+        })
 
-    var app5 = new Vue({
-        el:'#app5',
-        data:{
-            message:'abcd'
-        },
-        methods:{
-            reverseMage (){
-                this.message = this.message.split('').reverse().join('');
-                console.log('test');
+        // app2
+        Vue.component('button-count', {
+            props: ['msg'],
+            template: '<button v-on:click="incrementCounter">{{counter}} {{msg}}</button>',
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrementCounter() {
+                    this.counter += 1;
+                    this.$emit('increment')
+                }
             }
-        }
-    });
+        })
 
-    var app4 = new Vue({
-        el: '#app4',
-        data: {
-            todos: [{
-                text: 'Learn JavaScript'
-            }, {
-                text: 'Learn Vue'
-            }, {
-                text: 'Build something awesome'
-            }]
-        }
-    });
+        new Vue({
+            el: "#app2",
+            data: {
+                total: 0,
+                mod: 'mod',
+                price:0
+            },
+            methods: {
+                incrementTotal() {
+                    this.total += 1;
+                },
+                datas(e) {
+                    console.log(e)
+                    this.mod = e.target.value
+                }
+            }
+        })
 
+        // app1
+        Vue.component('my-com', {
+            props: ['message'],
+            template: '<p class="calss1 class2">ppp {{message}} </p>'
+        });
 
-    var app3 = new Vue({
-        el: '#app3',
-        data: {
-            see: true
+        let Child1 = {
+            template: '<div> child component'
         }
-    });
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'hello vue'
-        }
-    });
-    app.message = 'noredon';
 
-    var app2 = new Vue({
-        el: '#app2',
-        data: {
-            message: 'you loaded this page on' + new Date()
-        }
-    });
+        new Vue({
+            el: "#app1",
+            data() {
+                return {
+                    msg: 'msg',
+                    isAc: true,
+                    activeClass: "activeClasss",
+                    acProps: ''
+                }
+            },
+            components: {
+                'my-child': Child1
+            }
+        })
     </script>
 </body>
 
