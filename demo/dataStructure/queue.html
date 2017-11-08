@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>队列</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    /**
+     * 队列只能在队尾插入元素，只能在队首删除元素
+     *   -- 先进先出
+     * 栈只能在栈顶进行删除、增加元素操作 
+     *   -- 先进后出
+     */
+
+    function Queue() {
+        this.dataStore = [];
+    }
+
+    Queue.prototype.enqueue = function(ele) {
+        this.dataStore.push(ele);
+    }
+
+    Queue.prototype.dequeue = function() {
+        if (this.empty()) {
+            return 'this queue is empty';
+        } else {
+            this.dataStore.shift();
+        }
+    }
+
+    Queue.prototype.empty = function() {
+        return this.dataStore.length == 0 ? true : false;
+    }
+
+    Queue.prototype.front = function() {
+        return this.empty() ? 'this queue is empty' : this.dataStore[0];
+    }
+
+    Queue.prototype.back = function() {
+        return this.empty() ? 'this queue is empty' : this.dataStore[this.dataStore.length - 1];
+    }
+
+    Queue.prototype.toString = function() {
+        return this.dataStore.join('\n');
+    }
+
+    Queue.prototype.clear = function() {
+        delete this.dataStore;
+        this.dataStore = [];
+    }
+
+    // let queue = new Queue();
+
+    // queue.enqueue('num1');
+    // queue.enqueue('num2');
+    // queue.enqueue('num3');
+
+    // console.log(queue.empty());
+    // console.log(queue.dataStore);
+    // console.log(queue.front());
+    // console.log(queue.back());
+
+    // queue.dequeue();
+    // console.log(queue.dataStore);
+    // console.log(queue.front());
+    // console.log(queue.back());
+    // console.log(queue.toString());
+    // 
+    var queues = [];    //定义队列数组
+	var nums = [];      //定义数字数组
+
+	//选十个0~99的随机数进行排序
+	for ( var i = 0 ; i < 10 ; i ++ ){
+	    queues[i] = new Queue();
+	    nums[i] = Math.floor( Math.random() * 101 );
+	}
+
+	console.log(queues);
+	console.log(nums);
+    </script>
+</body>
+
+</html>

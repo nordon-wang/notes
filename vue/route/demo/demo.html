@@ -2,29 +2,35 @@
 <script src="../router.js"></script>
 
 <div id="app">
-  <p>
-	<router-link to="/user/foo">foo</router-link>
-	<router-link to="/user/bar">bar</router-link>
+	<h1>hhh</h1>
+	<p>
+		<router-link to="/foo">foo</router-link>
+		<router-link to="/bar">bar</router-link>
+	</p>
 	<router-view></router-view>
-  </p>
 </div>
 
 
 <script type="text/javascript">
+	const Foo = {template:'<div>foo view</div>'},
+		Bar = {template:'<div>bar view</div>'};
 
-const User = {template:`<div> userss {{ $route.params.username }} </div>`};
+	const routes = [
+		{path:'/foo',component:Foo},
+		{path:"/bar",component:Bar}
+	];
 
-const router = new VueRouter({
-	routes:[
-	{path:'/user/:username',component:User}]
-})
+	const router = new VueRouter({
+		routes
+	});
 
-const app = new Vue({
-	router
-}).$mount("#app")
+	new Vue({
+		router
+	}).$mount('#app');
 
 
 /**
- * user/foo -- user/bar 映射到相同的router
+ *this.$route.params.id
+ * 
  */
 </script>

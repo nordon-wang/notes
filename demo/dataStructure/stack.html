@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>栈</title>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+		// 栈的构造函数
+		function Stack() {
+			this.dataStore = [];
+			this.top = 0;
+			this.pop = pop;
+			this.push = push;
+			this.peek = peek;
+			this.length = length;
+			this.clear = clear;
+		}
+
+		function push(ele) {
+			this.dataStore[this.top++] = ele;
+		}
+
+		function pop() {
+			return this.dataStore[--this.top];
+		}
+
+		function peek() {
+			if (this.top > 0) {
+				return this.dataStore[this.top - 1];
+			}else{
+				return 'Empty';
+			}
+		}
+
+		function  length() {
+			return this.top;
+		}
+
+		function clear() {
+			delete this.dataStore;
+			this.dataStore = [];
+			this.top = 0;
+		}
+
+		// lets stack = new Stack();
+
+		// stack.push('num1');
+		// stack.push('num2');
+		// stack.push('num3');
+
+		// console.log(stack.dataStore);
+		// console.log(stack.length());
+
+		// console.log(stack.peek());
+		
+		// console.log(stack.pop());
+		// console.log(stack.dataStore);
+		// console.log(stack.length());
+
+		// stack.clear();
+		// console.log(stack.dataStore);
+		// console.log(stack.length());
+		
+
+		// 进制转换(2-9)
+		function mulBase(num,base) {
+			let stack = new Stack();
+			
+			do{
+				stack.push(num % base);
+				num = Math.floor(num /= base);
+			}while (num > 0);
+
+			let result = '';
+
+			while (stack.length() > 0) {
+				result += stack.pop();
+			}
+
+			return result;
+		}
+
+		console.log(mulBase(6,2));
+		console.log(mulBase(125,8));
+
+		// 判断是否为回文
+		function  isHui(ele) {
+			let stack = new Stack();
+			for (let i = 0; i < ele.length; i++) {
+				stack.push(ele[i]);
+			}
+
+			let rword = '';
+			while (stack.length() > 0) {
+				rword += stack.pop();
+			}
+
+			return ele === rword ? true : false;
+		}
+
+		console.log(isHui('level'));
+		console.log(isHui('1001'));
+		console.log(isHui('ssdd'));
+
+	</script>
+</body>
+</html>
